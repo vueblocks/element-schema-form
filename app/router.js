@@ -12,6 +12,10 @@ export default new Router({
     {
       path: '/test-common',
       component: () => import('@/views/test-common/index.vue')
+    },
+    {
+      path: '/form-generator',
+      component: () => import('@/views/form-generator/index.vue')
     }
   ]
 })

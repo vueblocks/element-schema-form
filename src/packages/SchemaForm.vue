@@ -11,7 +11,7 @@
           <slot v-if="des.slot" :name="des.slot"></slot>
           <template v-else>
             <el-form-item :prop="des.prop" v-bind="des.formItem">
-              <slot :name="col.frontSlot" v-if="col.frontSlot"></slot>
+              <slot :name="des.frontSlot" v-if="des.frontSlot"></slot>
               <component
                 v-bind="des.attrs"
                 v-on="$listeners"
@@ -23,7 +23,7 @@
                 :onEvents="des.on"
                 :options="options[des.prop]"
               />
-              <slot :name="col.rearSlot" v-if="col.rearSlot"></slot>
+              <slot :name="des.rearSlot" v-if="des.rearSlot"></slot>
             </el-form-item>
           </template>
         </el-col>

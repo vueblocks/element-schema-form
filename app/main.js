@@ -1,4 +1,7 @@
 import Vue from 'vue'
+
+import 'normalize.css'
+
 import App from './App.vue'
 import router from './router'
 import store from './store'
@@ -11,7 +14,9 @@ import FormSwitch from './components/form-switch/index.vue'
 
 Vue.component('FormSwitch', FormSwitch)
 
-Vue.use(ElementUI)
+Vue.use(ElementUI, {
+  size: 'small'
+})
 Vue.use(SchemaForm)
 
 Vue.config.productionTip = false
