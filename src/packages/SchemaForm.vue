@@ -3,27 +3,28 @@
     <el-row
       class="schema-form__row"
       v-bind="layout"
-      v-for="(row,idx) in formatedSchema"
-      :key="idx"
+      v-for="(row, rowIndex) in formatedSchema"
+      :key="rowIndex"
     >
-      <template v-for="(des, idx) in row">
-        <el-col v-bind="des.colGrid" v-if="!des.hide" :key="idx">
-          <slot v-if="des.slot" :name="des.slot"></slot>
+      <template v-for="(col, colIndex) in row">
+        <el-col v-bind="col.colGrid" v-if="!col.hide" :key="colIndex">
+          <slot :col="col" :rowIndex="rowIndex" :colIndex="colIndex"></slot>
+          <slot v-if="col.slot" :name="col.slot"></slot>
           <template v-else>
-            <el-form-item :prop="des.prop" v-bind="des.formItem">
-              <slot :name="des.frontSlot" v-if="des.frontSlot"></slot>
+            <el-form-item :prop="col.prop" v-bind="col.formItem">
+              <slot :name="col.frontSlot" v-if="col.frontSlot"></slot>
               <component
-                v-bind="des.attrs"
+                v-bind="col.attrs"
                 v-on="$listeners"
-                :is="getComponentName(des.type)"
-                :prop="des.prop"
-                :value.sync="module[des.prop]"
-                :modifier="des.modifier"
-                :dynamicAttrs="des.dynamicAttrs"
-                :onEvents="des.on"
-                :options="options[des.prop]"
+                :is="getComponentName(col.type)"
+                :prop="col.prop"
+                :value.sync="module[col.prop]"
+                :modifier="col.modifier"
+                :dynamicAttrs="col.dynamicAttrs"
+                :onEvents="col.on"
+                :options="options[col.prop]"
               />
-              <slot :name="des.rearSlot" v-if="des.rearSlot"></slot>
+              <slot :name="col.rearSlot" v-if="col.rearSlot"></slot>
             </el-form-item>
           </template>
         </el-col>
@@ -62,8 +63,11 @@ export default {
   },
   data () {
     return {
-      builtInNames: ['input', 'select', 'radio', 'datepicker', 'cascader']
+      builtInNames: ['input', 'select', 'radio', 'datepicker', 'cascader', 'placeholder']
     }
+  },
+  mounted () {
+    console.log(this.$slots)
   },
   methods: {
     // 组件名称

@@ -28,46 +28,70 @@
     </aside>
     <main class="form-generator__main">
       <el-card class="main-layout">
-        <div class="main-layout__section" v-for="(section, index) in layoutSections" :key="index">
-          <div class="main-layout__section-row" v-for="(row, idx) in section" :key="row+idx">
-            <el-popover
-              placement="bottom"
-              width="400"
-              trigger="click">
-              <ul class="component-basic">
-                <li
-                  v-for="comp in basicComponents"
-                  class="component-basic__item"
-                  :key="comp.type"
-                  @click="handleAddComponent(comp, index)">
-                  <span>{{comp.name}}</span>
-                </li>
-              </ul>
-              <el-button type="primary" size="mini" icon="el-icon-plus" circle slot="reference" />
-            </el-popover>
-          </div>
-        </div>
+        <el-form
+          :model="formModel"
+          :label-position="formSettings.labelPosition"
+          :size="formSettings.size"
+          label-width="80px">
+          <schema-form
+            :module="formModel"
+            :schema="layoutSections"
+            :options="formOptions"
+            :layout="formLayout">
+            <template #default="scope" class="btn-addCol">
+              <el-popover
+                v-if="scope.col.isCustom === 'btn-addCol'"
+                placement="bottom"
+                width="400"
+                trigger="click">
+                <ul class="component-basic">
+                  <li
+                    v-for="comp in basicComponents"
+                    class="component-basic__item"
+                    :key="comp.type"
+                    @click="handleAddComponent(comp, scope)">
+                    <span>{{comp.name}}</span>
+                  </li>
+                </ul>
+                <el-button type="primary" size="mini" icon="el-icon-plus" circle slot="reference"/>
+              </el-popover>
+            </template>
+          </schema-form>
+        </el-form>
       </el-card>
     </main>
     <section class="form-generator__config-panel">
       <el-card class="config-panel-layout">
+        <config-panel />
       </el-card>
     </section>
   </div>
 </template>
 
 <script>
+import ConfigPanel from './config-panel'
+
 export default {
   name: 'FormGenerator',
+  components: {
+    ConfigPanel
+  },
+  provide () {
+    return {
+      fg: this
+    }
+  },
   data () {
     return {
+      // aside
       activeLayout: [],
       layouts: [
         [24],
         [12, 12],
         [8, 8, 8],
         [6, 6, 6, 6],
-        [4, 4, 4, 4, 4],
+        [5, 5, 5, 5, 5],
+        [4, 4, 4, 4, 4, 4],
         [9, 15],
         [15, 9],
         [8, 16],
@@ -83,6 +107,7 @@ export default {
         [4, 4, 4, 12],
         [12, 4, 4, 4]
       ],
+      // main
       layoutSections: [],
       basicComponents: [
         {
@@ -101,7 +126,16 @@ export default {
           type: 'datepicker',
           name: '日期控件'
         }
-      ]
+      ],
+      formModel: {},
+      formOptions: {},
+      formLayout: {
+        gutter: 16
+      },
+      formSettings: {
+        labelPosition: 'left',
+        size: 'small'
+      }
     }
   },
   methods: {
@@ -109,14 +143,71 @@ export default {
       const len = item.length
       return (100 - len * 3) / len
     },
-    handleChangeLayout (val) {
-      console.log(val)
-      this.layoutSections.push(val)
-    },
-    handleAddComponent (comp, index) {
-      this.layoutSections[index].push({
-
+    handleChangeLayout (data) {
+      console.log(data)
+      console.log(this.$slots)
+      const initVal = data.map((val, idx) => {
+        return {
+          colGrid: { span: val },
+          isCustom: 'btn-addCol'
+        }
       })
+      this.layoutSections.push(initVal)
+    },
+    handleAddComponent (comp, scope) {
+      const { col, rowIndex, colIndex } = scope
+      console.group('---- ---- ----')
+      console.log(comp)
+      console.log(col)
+      console.log('row', rowIndex)
+      console.log('col', colIndex)
+      console.groupEnd()
+      const formater = [
+        {
+          type: 'input',
+          prop: 'name',
+          formItem: { label: 'Label' }
+        },
+        {
+          type: 'select',
+          prop: 'city',
+          formItem: { label: '城市' }
+        },
+        {
+          type: 'radio',
+          prop: 'sex',
+          formItem: { label: '性别' }
+        },
+        {
+          type: 'datepicker',
+          prop: 'expire',
+          formItem: { label: '有效期' },
+          attrs: {
+            type: 'monthrange',
+            'range-separator': '至',
+            'start-placeholder': '开始月份',
+            'end-placeholder': '结束月份'
+          }
+        }
+      ]
+      const component = formater.find(v => comp.type === v.type)
+      const oldSection = this.layoutSections[rowIndex][colIndex]
+      const newSection = {
+        ...component,
+        colGrid: oldSection.colGrid
+      }
+      this.layoutSections[rowIndex].splice(colIndex, 1, newSection)
+      this.$set(this.formModel, 'name', '')
+      this.$set(this.formModel, 'city', '')
+      this.$set(this.formModel, 'sex', 'male')
+      this.$set(this.formModel, 'expire', '')
+      this.formOptions.city = [
+        { label: '北京', value: 'beijing' },
+        { label: '上海', value: 'shanghai' },
+        { label: '广州', value: 'guangzhou' },
+        { label: '深圳', value: 'shenzhen' }
+      ]
+      this.formOptions.sex = [{ label: '男', value: 'male' }, { label: '女', value: 'female' }]
     }
   }
 }
@@ -156,6 +247,17 @@ export default {
     cursor: pointer;
   }
 }
+.form-generator {
+  .schema-form {
+    &__row.el-row {
+      display: flex;
+      align-items: center;
+      // .el-col {
+      //   text-align: center;
+      // }
+    }
+  }
+}
 </style>
 
 <style lang="less" scoped>
@@ -184,6 +286,7 @@ export default {
         min-height: auto;
         box-sizing: content-box;
         padding: 20px 0;
+        &.is-active,
         &:hover {
           margin: -2px;
           border: 2px solid #fa4;

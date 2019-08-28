@@ -7,7 +7,7 @@
         router
         background-color="#545c64"
         text-color="#fff"
-        active-text-color="#ffd04b"
+        active-text-color="#fa4"
         :default-active="activeIndex"
         @select="handleSelect">
         <el-menu-item index="1" route="/test-common">基础组件</el-menu-item>

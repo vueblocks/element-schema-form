@@ -4,6 +4,7 @@ import SchemaFormSelect from './packages/components/SchemaFormSelect'
 import SchemaFormRadio from './packages/components/SchemaFormRadio'
 import SchemaFormDatepicker from './packages/components/SchemaFormDatepicker'
 import SchemaFormCascader from './packages/components/SchemaFormCascader'
+import SchemaFormPlaceholder from './packages/components/SchemaFormPlaceholder'
 
 import FormMixin from './packages/mixins/form-mixin'
 
@@ -13,7 +14,8 @@ const components = [
   SchemaFormSelect,
   SchemaFormRadio,
   SchemaFormDatepicker,
-  SchemaFormCascader
+  SchemaFormCascader,
+  SchemaFormPlaceholder
 ]
 
 function install (Vue, _) {
