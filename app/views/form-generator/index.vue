@@ -38,23 +38,33 @@
             :schema="layoutSections"
             :options="formOptions"
             :layout="formLayout">
-            <template #default="scope" class="btn-addCol">
-              <el-popover
-                v-if="scope.col.isCustom === 'btn-addCol'"
-                placement="bottom"
-                width="400"
-                trigger="click">
-                <ul class="component-basic">
-                  <li
-                    v-for="comp in basicComponents"
-                    class="component-basic__item"
-                    :key="comp.type"
-                    @click="handleAddComponent(comp, scope)">
-                    <span>{{comp.name}}</span>
-                  </li>
-                </ul>
-                <el-button type="primary" size="mini" icon="el-icon-plus" circle slot="reference"/>
-              </el-popover>
+            <template #default="scope">
+              <div class="btn-addCol">
+                <el-popover
+                  v-if="scope.col.isCustom === 'btn-addCol'"
+                  placement="bottom"
+                  width="400"
+                  trigger="click">
+                  <ul class="component-basic">
+                    <li
+                      v-for="comp in basicComponents"
+                      class="component-basic__item"
+                      :key="comp.type"
+                      @click="handleAddComponent(comp, scope)">
+                      <span>{{comp.name}}</span>
+                    </li>
+                  </ul>
+                  <el-button type="primary" size="mini" icon="el-icon-plus" circle slot="reference"/>
+                </el-popover>
+                <el-button
+                  class="btn-removeCol"
+                  type="primary"
+                  size="mini"
+                  icon="el-icon-close"
+                  circle
+                  @click="handleRemoveComponent(scope)"
+                />
+              </div>
             </template>
           </schema-form>
         </el-form>
@@ -208,12 +218,23 @@ export default {
         { label: '深圳', value: 'shenzhen' }
       ]
       this.formOptions.sex = [{ label: '男', value: 'male' }, { label: '女', value: 'female' }]
+    },
+    handleRemoveComponent (scope) {
+      const { col, rowIndex, colIndex } = scope
+      const oldSection = {
+        isCustom: 'btn-addCol',
+        colGrid: col.colGrid
+      }
+      this.layoutSections[rowIndex].splice(colIndex, 1, oldSection)
     }
   }
 }
 </script>
 
 <style lang="less">
+@yellow: #fa4;
+@pink: #f4a;
+
 .component-basic {
   display: flex;
   flex-wrap: wrap;
@@ -252,10 +273,46 @@ export default {
     &__row.el-row {
       display: flex;
       align-items: center;
-      // .el-col {
-      //   text-align: center;
-      // }
+      margin: -2px;
+      padding: 20px;
+      transition-duration: .33s;
+      transition-property: box-shadow;
+      box-shadow:
+        inset 0 0 0 2px transparent,
+        0 0 1px rgba(0, 0, 0, 0);
+      &:hover {
+        box-shadow:
+          inset 0 0 0 2px @yellow,
+          0 0 1px rgba(0, 0, 0, 0);
+      }
+      .el-col {
+        padding: 20px;
+        transition: .33s all;
+        box-shadow:
+          inset 0 0 0 2px transparent,
+          0 0 1px rgba(0, 0, 0, 0);
+        &:hover {
+          .btn-removeCol {
+            display: block;
+          }
+          box-shadow:
+            inset 0 0 0 2px @pink,
+            0 0 1px rgba(0, 0, 0, 0);
+        }
+        // &:after {
+        // }
+      }
     }
+  }
+  .btn-addCol {
+    .btn-removeCol {
+      display: none;
+      position: absolute;
+      bottom: 7px;
+    }
+  }
+  .btn-addCol + .el-form-item {
+    margin-bottom: 0;
   }
 }
 </style>
@@ -277,7 +334,7 @@ export default {
   }
   &__main {
     margin-left: 20px;
-    width: 66%;
+    flex: 1;
     .main-layout {
       height: 800px;
       &__section {
@@ -294,10 +351,14 @@ export default {
         }
       }
     }
+    .btn-addCol {
+      display: flex;
+      justify-content: center;
+    }
   }
   &__config-panel {
-    flex: 1;
     margin-left: 20px;
+    width: 336px;
     .config-panel-layout {
       height: 800px;
     }

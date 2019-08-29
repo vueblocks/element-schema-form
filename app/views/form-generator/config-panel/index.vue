@@ -15,9 +15,9 @@
               </el-col>
               <el-col :span="18" class="figure-control">
                 <el-radio-group v-model="fg.formSettings.labelPosition" size="mini">
-                  <el-radio-button label="left">左对齐</el-radio-button>
-                  <el-radio-button label="right">右对齐</el-radio-button>
-                  <el-radio-button label="top">顶部对齐</el-radio-button>
+                  <el-radio-button label="left">左</el-radio-button>
+                  <el-radio-button label="right">右</el-radio-button>
+                  <el-radio-button label="top">顶部</el-radio-button>
                 </el-radio-group>
               </el-col>
             </el-row>

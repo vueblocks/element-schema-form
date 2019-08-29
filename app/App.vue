@@ -1,6 +1,6 @@
 <template>
   <el-container>
-    <el-header>
+    <el-header style="padding: 0;">
       <el-menu
         class="el-menu--form-generator"
         mode="horizontal"
