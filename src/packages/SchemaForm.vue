@@ -63,7 +63,9 @@ export default {
   },
   data () {
     return {
-      builtInNames: ['input', 'select', 'radio', 'datepicker', 'cascader', 'placeholder']
+      builtInNames: ['input', 'select', 'radio', 'datepicker',
+        'cascader', 'placeholder', 'checkbox', 'slider', 'timeselect',
+        'rate', 'switch', 'colorpicker', 'tags', 'progress']
     }
   },
   mounted () {

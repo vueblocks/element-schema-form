@@ -10,9 +10,6 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 
 import SchemaForm from '../src/index'
-import FormSwitch from './components/form-switch/index.vue'
-
-Vue.component('FormSwitch', FormSwitch)
 
 Vue.use(ElementUI, {
   size: 'small'

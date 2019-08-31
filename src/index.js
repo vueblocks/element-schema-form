@@ -5,6 +5,14 @@ import SchemaFormRadio from './packages/components/SchemaFormRadio'
 import SchemaFormDatepicker from './packages/components/SchemaFormDatepicker'
 import SchemaFormCascader from './packages/components/SchemaFormCascader'
 import SchemaFormPlaceholder from './packages/components/SchemaFormPlaceholder'
+import SchemaFormCheckbox from './packages/components/SchemaFormCheckbox.vue'
+import SchemaFormSlider from './packages/components/SchemaFormSlider.vue'
+import SchemaFormTimeselect from './packages/components/SchemaFormTimeselect.vue'
+import SchemaFormRate from './packages/components/SchemaFormRate.vue'
+import SchemaFormSwitch from './packages/components/SchemaFormSwitch.vue'
+import SchemaFormColorpicker from './packages/components/SchemaFormColorpicker.vue'
+import SchemaFormTags from './packages/components/SchemaFormTags.vue'
+import SchemaFormProgress from './packages/components/SchemaFormProgress.vue'
 
 import FormMixin from './packages/mixins/form-mixin'
 
@@ -15,7 +23,15 @@ const components = [
   SchemaFormRadio,
   SchemaFormDatepicker,
   SchemaFormCascader,
-  SchemaFormPlaceholder
+  SchemaFormPlaceholder,
+  SchemaFormCheckbox,
+  SchemaFormSlider,
+  SchemaFormTimeselect,
+  SchemaFormRate,
+  SchemaFormSwitch,
+  SchemaFormColorpicker,
+  SchemaFormTags,
+  SchemaFormProgress
 ]
 
 function install (Vue, _) {
