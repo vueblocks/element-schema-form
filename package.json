@@ -16,6 +16,7 @@
   "dependencies": {
     "core-js": "^2.6.5",
     "element-ui": "^2.11.1",
+    "jsoneditor": "^7.0.1",
     "lodash.clonedeep": "^4.5.0",
     "normalize.css": "^8.0.1",
     "vue": "^2.6.10",

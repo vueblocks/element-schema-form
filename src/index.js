@@ -14,6 +14,8 @@ import SchemaFormColorpicker from './packages/components/SchemaFormColorpicker.v
 import SchemaFormTags from './packages/components/SchemaFormTags.vue'
 import SchemaFormProgress from './packages/components/SchemaFormProgress.vue'
 
+import SchemaFormJsoneditor from './packages/components/SchemaFormJsoneditor.vue'
+
 import FormMixin from './packages/mixins/form-mixin'
 
 const components = [
@@ -31,13 +33,15 @@ const components = [
   SchemaFormSwitch,
   SchemaFormColorpicker,
   SchemaFormTags,
-  SchemaFormProgress
+  SchemaFormProgress,
+  SchemaFormJsoneditor
 ]
 
-function install (Vue, _) {
+function install (Vue, opts = {}) {
   components.forEach(component => {
     Vue.component(component.name, component)
   })
+  Vue.prototype.$globalParams = opts
 }
 
 export default install
