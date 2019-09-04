@@ -15,6 +15,8 @@ import SchemaFormTags from './packages/components/SchemaFormTags.vue'
 import SchemaFormProgress from './packages/components/SchemaFormProgress.vue'
 
 import SchemaFormJsoneditor from './packages/components/SchemaFormJsoneditor.vue'
+import SchemaFormQuill from './packages/components/SchemaFormQuill.vue'
+import SchemaFormCodemirror from './packages/components/SchemaFormCodemirror.vue'
 
 import FormMixin from './packages/mixins/form-mixin'
 
@@ -33,8 +35,7 @@ const components = [
   SchemaFormSwitch,
   SchemaFormColorpicker,
   SchemaFormTags,
-  SchemaFormProgress,
-  SchemaFormJsoneditor
+  SchemaFormProgress
 ]
 
 function install (Vue, opts = {}) {
@@ -48,7 +49,10 @@ export default install
 
 export {
   SchemaForm,
-  FormMixin
+  FormMixin,
+  SchemaFormJsoneditor,
+  SchemaFormQuill,
+  SchemaFormCodemirror
 }
 
 if (typeof window !== 'undefined' && window.Vue) {

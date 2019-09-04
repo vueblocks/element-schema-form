@@ -33,12 +33,13 @@ export default {
         return list.map(item => {
           if (item.prop === 'json') {
             return { ...item,
-              dynamicAttrs: { mode: this.mode,
-                options: {
-                  onError: this.onError,
-                  onValidate: this.onValidate
-                } } }
+              dynamicAttrs: {
+                mode: this.mode,
+                options: { onError: this.onError, onValidate: this.onValidate } }
+            }
           }
+          if (item.prop === 'quill') return { ...item, on: { focus: this.onFocus } }
+          if (item.prop === 'code') return { ...item, on: { blur: this.onBlur } }
           return item
         })
       })
@@ -61,8 +62,14 @@ export default {
       }
       return errors
     },
-    onChange ({ instance }) {
-      console.log('instance: ', instance)
+    onChange ({ instance }) { // json 实例
+      console.log('json编辑器instance: ', instance)
+    },
+    onFocus (quill) { // 富文本编辑器实例
+      console.log('quill编辑器instance ', quill)
+    },
+    onBlur (code) {
+      console.log('codeMirror编辑器instance ', code)
     }
   }
 }

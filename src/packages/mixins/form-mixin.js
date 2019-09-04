@@ -19,8 +19,15 @@ export default {
         this.$emit('update:value', this.formatVal(val))
       }
     },
+    componentName () {
+      let _name = this.$options.name
+      return _name.replace('SchemaForm', '').toLowerCase() || ''
+    },
+    globalOptions () {
+      return this.$globalParams[this.componentName] || {}
+    },
     attrsAll () {
-      return { ...this.$attrs, ...this.dynamicAttrs }
+      return { ...this.globalOptions, ...this.$attrs, ...this.dynamicAttrs }
     }
   },
   methods: {

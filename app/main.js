@@ -8,13 +8,33 @@ import store from './store'
 
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
+// 引入codeMirror的样式
+import 'codemirror/theme/cobalt.css'
+import 'codemirror/mode/javascript/javascript.js'
 
-import SchemaForm from '../src/index'
+import SchemaForm, { SchemaFormJsoneditor, SchemaFormQuill, SchemaFormCodemirror } from '../src/index'
 
 Vue.use(ElementUI, {
   size: 'small'
 })
-Vue.use(SchemaForm)
+Vue.component('SchemaFormJsoneditor', SchemaFormJsoneditor)
+Vue.component('SchemaFormQuill', SchemaFormQuill)
+
+Vue.component('SchemaFormCodemirror', SchemaFormCodemirror)
+Vue.use(SchemaForm, {
+  'codemirror': {
+    cmOptions: {
+      tabSize: 2,
+      mode: 'text/javascript',
+      theme: 'cobalt',
+      lineNumbers: true,
+      line: true
+    }
+  },
+  input: {
+    placeholder: '全局定义变量实验'
+  }
+})
 
 Vue.config.productionTip = false
 

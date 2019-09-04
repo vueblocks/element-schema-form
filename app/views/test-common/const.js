@@ -20,6 +20,7 @@ export const schema = [
       type: 'input',
       prop: 'name',
       formItem: { label: '姓名' },
+      attrs: { placeholder: '测试优先级' },
       colGrid: { span: 8 }
     }, {
       type: 'input',
