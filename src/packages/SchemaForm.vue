@@ -64,7 +64,7 @@ export default {
   data () {
     return {
       builtInNames: ['input', 'select', 'radio', 'datepicker',
-        'cascader', 'placeholder', 'checkbox', 'slider', 'timeselect',
+        'cascader', 'placeholder', 'checkbox', 'slider', 'timeselect', 'jsoneditor', 'quill', 'codemirror',
         'rate', 'switch', 'colorpicker', 'tags', 'progress']
     }
   },
