@@ -16,7 +16,8 @@
             :options="formOptions"
             :layout="formLayout">
             <template #default="scope">
-              <div class="btn-addCol">
+              <!-- 自定义 form item -->
+              <div class="schema-form-item schema-form-item--custom">
                 <el-popover
                   v-if="scope.col.isCustom === 'btn-addCol'"
                   placement="bottom"
@@ -33,14 +34,16 @@
                   </ul>
                   <el-button type="primary" size="mini" icon="el-icon-plus" circle slot="reference"/>
                 </el-popover>
-                <el-button
-                  class="btn-removeCol"
-                  type="primary"
-                  size="mini"
-                  icon="el-icon-delete"
-                  circle
-                  @click="handleRemoveComponent(scope)"
-                />
+                <template v-else>
+                  <el-button
+                    class="btn-removeCol"
+                    type="primary"
+                    size="mini"
+                    icon="el-icon-delete"
+                    circle
+                    @click="handleRemoveComponent(scope)"
+                  />
+                </template>
               </div>
             </template>
           </schema-form>
@@ -58,6 +61,7 @@
 <script>
 import AsidePanel from './aside-panel'
 import ConfigPanel from './config-panel'
+import { BASIC_COMPONENTS } from '@/constant/formGenerator'
 
 export default {
   name: 'FormGenerator',
@@ -74,44 +78,27 @@ export default {
     return {
       // main
       layoutSections: [],
-      basicComponents: [
-        {
-          type: 'input',
-          name: '输入框'
-        },
-        {
-          type: 'select',
-          name: '选择框'
-        },
-        {
-          type: 'radio',
-          name: '单选按钮'
-        },
-        {
-          type: 'datepicker',
-          name: '日期控件'
-        }
-      ],
+      basicComponents: BASIC_COMPONENTS,
       formFormater: [
         {
           type: 'input',
-          prop: 'name',
-          formItem: { label: 'Label' }
+          prop: 'prop',
+          formItem: { label: 'label' }
         },
         {
           type: 'select',
           prop: 'city',
-          formItem: { label: '城市' }
+          formItem: { label: 'label' }
         },
         {
           type: 'radio',
           prop: 'sex',
-          formItem: { label: '性别' }
+          formItem: { label: 'label' }
         },
         {
           type: 'datepicker',
           prop: 'expire',
-          formItem: { label: '有效期' },
+          formItem: { label: 'label' },
           attrs: {
             type: 'monthrange',
             'range-separator': '至',
@@ -122,9 +109,11 @@ export default {
       ],
       formModel: {},
       formOptions: {},
+      // 表单设置 - 栅格布局
       formLayout: {
         gutter: 16
       },
+      // 表单设置 - 表单属性
       formSettings: {
         labelPosition: 'left',
         size: 'small'
@@ -239,19 +228,17 @@ export default {
             inset 0 0 0 2px @pink,
             0 0 1px rgba(0, 0, 0, 0);
         }
-        // &:after {
-        // }
       }
     }
   }
-  .btn-addCol {
+  .schema-form-item--custom {
     .btn-removeCol {
       display: none;
       position: absolute;
       bottom: 7px;
     }
   }
-  .btn-addCol + .el-form-item {
+  .schema-form-item--custom + .el-form-item {
     margin-bottom: 0;
   }
 }
@@ -283,7 +270,7 @@ export default {
         }
       }
     }
-    .btn-addCol {
+    .schema-form-item--custom {
       display: flex;
       justify-content: center;
     }

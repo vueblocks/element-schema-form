@@ -35,11 +35,11 @@
         <transition-group type="transition" :name="!dragging ? 'flip-list' : null">
           <li
             class="aside-layout__colitem"
-            v-for="(element) in colitemsGroup"
+            v-for="(element, idx) in colitemsGroup"
             :key="element.prop"
           >
             <span>{{ element.prop }}</span>
-            <div class="colitem-icon colitem-icon--delete" @click="handleRemoveColumn(element)">
+            <div class="colitem-icon colitem-icon--delete" @click="handleRemoveColumn(element, idx)">
               <svg viewBox="0 0 28 28" preserveAspectRatio="xMidYMid meet" shape-rendering="geometricPrecision">
                 <g><path d="M19 9h-3V8a1 1 0 0 0-1-1h-2a1 1 0 0 0-1 1v1H9a1 1 0 1 0 0 2h10a1 1 0 0 0 .004-2H19zM9 20c.021.543.457.979 1 1h8c.55-.004.996-.45 1-1v-7H9v7zm2.02-4.985h2v4h-2v-4zm4 0h2v4h-2v-4z" fill-rule="evenodd"></path></g>
               </svg>
@@ -148,8 +148,12 @@ export default {
       // TODO 处理添加列业务逻辑
       console.log('add column')
     },
-    handleRemoveColumn (element) {
-      // TODO 处理删除列业务逻辑
+    handleRemoveColumn (element, colIndex) {
+      const oldSection = {
+        isCustom: 'btn-addCol',
+        colGrid: element.colGrid
+      }
+      this.fg.layoutSections[this.activeSection].splice(colIndex, 1, oldSection)
     }
   }
 }
