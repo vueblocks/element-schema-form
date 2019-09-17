@@ -1,6 +1,6 @@
 export default {
   props: {
-    value: [Number, String, Array, Object, Boolean], // 绑定值
+    value: [Number, String, Array, Object, Boolean, Date], // 绑定值
     prop: String,
     modifier: String, // v-model修饰符
     dynamicAttrs: Object, // 动态属性

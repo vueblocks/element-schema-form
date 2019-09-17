@@ -1,7 +1,7 @@
 <template>
   <div class="form-generator">
     <aside class="form-generator__aside">
-      <aside-panel />
+      <aside-panel @deleteComp="onDeleteComp"/>
     </aside>
     <main class="form-generator__main">
       <el-card class="main-layout">
@@ -35,14 +35,22 @@
                   <el-button type="primary" size="mini" icon="el-icon-plus" circle slot="reference"/>
                 </el-popover>
                 <template v-else>
-                  <el-button
-                    class="btn-removeCol"
-                    type="primary"
-                    size="mini"
-                    icon="el-icon-delete"
-                    circle
-                    @click="handleRemoveComponent(scope)"
-                  />
+                  <span class="btn-removeCol">
+                    <el-button
+                      type="primary"
+                      size="mini"
+                      icon="el-icon-delete"
+                      circle
+                      @click="handleRemoveComponent(scope)"
+                    />
+                    <el-button
+                      type="primary"
+                      size="mini"
+                      icon="el-icon-edit"
+                      circle
+                      @click="handleEditComponent(scope)"
+                    />
+                  </span>
                 </template>
               </div>
             </template>
@@ -52,7 +60,7 @@
     </main>
     <section class="form-generator__config-panel">
       <el-card class="config-panel-layout">
-        <config-panel />
+        <config-panel ref="configPanel"/>
       </el-card>
     </section>
   </div>
@@ -79,34 +87,6 @@ export default {
       // main
       layoutSections: [],
       basicComponents: BASIC_COMPONENTS,
-      formFormater: [
-        {
-          type: 'input',
-          prop: 'prop',
-          formItem: { label: 'label' }
-        },
-        {
-          type: 'select',
-          prop: 'city',
-          formItem: { label: 'label' }
-        },
-        {
-          type: 'radio',
-          prop: 'sex',
-          formItem: { label: 'label' }
-        },
-        {
-          type: 'datepicker',
-          prop: 'expire',
-          formItem: { label: 'label' },
-          attrs: {
-            type: 'monthrange',
-            'range-separator': '至',
-            'start-placeholder': '开始月份',
-            'end-placeholder': '结束月份'
-          }
-        }
-      ],
       formModel: {},
       formOptions: {},
       // 表单设置 - 栅格布局
@@ -117,7 +97,8 @@ export default {
       formSettings: {
         labelPosition: 'left',
         size: 'small'
-      }
+      },
+      orderRecord: 0 // 每次生成向上迭代
     }
   },
   methods: {
@@ -129,24 +110,30 @@ export default {
       console.log('row', rowIndex)
       console.log('col', colIndex)
       console.groupEnd()
-      const component = this.formFormater.find(v => comp.type === v.type)
+      // 设定组件类型
+      let _propIdx = this.orderRecord += 1
+      let _component = {
+        type: comp.type,
+        prop: `default_${_propIdx}`,
+        formItem: { label: 'label:' }
+      }
       const oldSection = this.layoutSections[rowIndex][colIndex]
       const newSection = {
-        ...component,
+        ..._component,
         colGrid: oldSection.colGrid
       }
       this.layoutSections[rowIndex].splice(colIndex, 1, newSection)
-      this.$set(this.formModel, 'name', '')
-      this.$set(this.formModel, 'city', '')
-      this.$set(this.formModel, 'sex', 'male')
-      this.$set(this.formModel, 'expire', '')
-      this.formOptions.city = [
-        { label: '北京', value: 'beijing' },
-        { label: '上海', value: 'shanghai' },
-        { label: '广州', value: 'guangzhou' },
-        { label: '深圳', value: 'shenzhen' }
-      ]
-      this.formOptions.sex = [{ label: '男', value: 'male' }, { label: '女', value: 'female' }]
+      // 设置module
+      this.$set(this.formModel, `default_${_propIdx}`, comp.value)
+      // 设置option
+      if (comp.needOption) {
+        this.$set(this.formOptions, `default_${_propIdx}`, [
+          { label: '选择A', value: 'A' },
+          { label: '选择B', value: 'B' }
+        ])
+      }
+      // 编辑弹窗
+      this.onCompEdit(`default_${_propIdx}`)
     },
     handleRemoveComponent (scope) {
       const { col, rowIndex, colIndex } = scope
@@ -155,6 +142,18 @@ export default {
         colGrid: col.colGrid
       }
       this.layoutSections[rowIndex].splice(colIndex, 1, oldSection)
+      this.onCompEdit('')
+    },
+    handleEditComponent ({ col }) {
+      this.onCompEdit(col.prop)
+    },
+    onDeleteComp () {
+      this.onCompEdit('')
+    },
+    onCompEdit (prop) {
+      this.$nextTick(() => {
+        this.$refs.configPanel.editCompAttr(prop)
+      })
     }
   }
 }

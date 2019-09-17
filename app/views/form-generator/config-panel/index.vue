@@ -1,6 +1,6 @@
 <template>
   <div class="config-panel">
-    <el-tabs v-model="activeTab" @tab-click="handleClickTab" stretch>
+    <el-tabs v-model="activeTab" stretch>
       <el-tab-pane label="表单设置" name="formSetting">
         <!-- 表单属性 -->
         <fieldset class="config-panel__fieldset">
@@ -58,23 +58,31 @@
           </figure>
         </fieldset>
       </el-tab-pane>
-      <el-tab-pane label="组件属性" name="componentSetting"></el-tab-pane>
+      <el-tab-pane label="组件属性" name="componentSetting">
+        <component-panel :editProp.sync="editProp"/>
+      </el-tab-pane>
     </el-tabs>
   </div>
 </template>
 
 <script>
+import ComponentPanel from './module/component-panel'
 export default {
   name: 'ConfigPanel',
   inject: ['fg'],
+  components: {
+    ComponentPanel
+  },
   data () {
     return {
-      activeTab: 'formSetting'
+      activeTab: 'formSetting',
+      editProp: ''
     }
   },
   methods: {
-    handleClickTab (tab, event) {
-      console.log(tab, event)
+    editCompAttr (prop) {
+      this.editProp = prop || ''
+      this.activeTab = 'componentSetting'
     }
   }
 }
