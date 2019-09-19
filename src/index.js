@@ -17,8 +17,10 @@ import SchemaFormProgress from './packages/components/SchemaFormProgress.vue'
 import SchemaFormJsoneditor from './packages/components/SchemaFormJsoneditor.vue'
 import SchemaFormQuill from './packages/components/SchemaFormQuill.vue'
 import SchemaFormCodemirror from './packages/components/SchemaFormCodemirror.vue'
+import SchemaFormItem from './packages/SchemaFormItem'
 
 import FormMixin from './packages/mixins/form-mixin'
+import LayoutMixin from './packages/mixins/layout-mixin'
 
 const components = [
   SchemaForm,
@@ -52,7 +54,9 @@ export {
   FormMixin,
   SchemaFormJsoneditor,
   SchemaFormQuill,
-  SchemaFormCodemirror
+  SchemaFormCodemirror,
+  SchemaFormItem,
+  LayoutMixin
 }
 
 if (typeof window !== 'undefined' && window.Vue) {

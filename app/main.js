@@ -12,7 +12,7 @@ import 'element-ui/lib/theme-chalk/index.css'
 import 'codemirror/theme/cobalt.css'
 import 'codemirror/mode/javascript/javascript.js'
 
-import SchemaForm, { SchemaFormJsoneditor, SchemaFormQuill, SchemaFormCodemirror } from '../src/index'
+import SchemaForm, { SchemaFormItem, SchemaFormJsoneditor, SchemaFormQuill, SchemaFormCodemirror } from '../src/index'
 
 Vue.use(ElementUI, {
   size: 'small'
@@ -21,6 +21,8 @@ Vue.component('SchemaFormJsoneditor', SchemaFormJsoneditor)
 Vue.component('SchemaFormQuill', SchemaFormQuill)
 
 Vue.component('SchemaFormCodemirror', SchemaFormCodemirror)
+Vue.component('SchemaFormItem', SchemaFormItem)
+
 Vue.use(SchemaForm, {
   'codemirror': {
     cmOptions: {

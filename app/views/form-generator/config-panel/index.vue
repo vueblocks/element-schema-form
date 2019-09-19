@@ -59,7 +59,7 @@
         </fieldset>
       </el-tab-pane>
       <el-tab-pane label="组件属性" name="componentSetting">
-        <component-panel :editProp.sync="editProp"/>
+        <component-panel :editProp.sync="editProp" @success="onClearProp"/>
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -83,6 +83,9 @@ export default {
     editCompAttr (prop) {
       this.editProp = prop || ''
       this.activeTab = 'componentSetting'
+    },
+    onClearProp () {
+      this.$emit('clearProp')
     }
   }
 }

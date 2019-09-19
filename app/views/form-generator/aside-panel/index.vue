@@ -1,27 +1,11 @@
 <template>
   <el-card class="aside-layout">
-    <label for="aside-layout" class="aside-layout__label">选择布局</label>
-    <el-select v-model="activeLayout" placeholder="请选择" @change="handleChangeLayout">
-      <el-option
-        v-for="(layout, index) in rowLayouts"
-        :key="index"
-        :label="index+''"
-        :value="layout">
-        <svg fill="#BEC9D6">
-          <template v-for="(item, idx) in layout">
-            <rect
-              :key="idx"
-              :width="`${getRectWidth(layout)}%`"
-              height="20"
-              y="5"
-              rx="5"
-              ry="5"
-              :x="idx === 0 ? '0%' : `${(getRectWidth(layout) + 3) * idx}%`"
-            />
-          </template>
-        </svg>
-      </el-option>
-    </el-select>
+    <label for="aside-layout" class="aside-layout__label">布局操作</label>
+    <section class="aside-layout__rowEdit">
+      <row-select type="addRow" @editRow="onAddRow"/>
+      <row-select type="editRow" :activeLayOut="activeLayOut" @editRow="onEditRow"/>
+      <row-select type="deleteRow" @deleteRow="onDeleteRow"/>
+    </section>
     <div class="aside-layout__colitems-wrap">
       <draggable
         v-model="colitemsGroup"
@@ -37,6 +21,7 @@
             class="aside-layout__colitem"
             v-for="(element, idx) in colitemsGroup"
             :key="element.prop || idx"
+            :class="{'aside-layout__colitem--active': element.prop === activeProp}"
           >
             <template v-if="element.prop">
               <span>{{ element.prop }}</span>
@@ -48,68 +33,31 @@
             </template>
           </li>
         </transition-group>
-        <div
-          slot="footer"
-          class="aside-layout__colitem-action"
-          role="group"
-          key="footer"
-        >
-          <div class="colitem-action__btn">
-            <el-button type="primary" size="mini" icon="el-icon-plus" @click="handleAddColumn" circle></el-button>
-          </div>
-          <div class="colitem-action__label"><span>新增列</span></div>
-        </div>
       </draggable>
     </div>
   </el-card>
 </template>
 
 <script>
+
 import Draggable from 'vuedraggable'
+import RowSelect from './module/row-select'
 
 export default {
   name: 'AsidePanel',
   components: {
-    Draggable
+    Draggable,
+    RowSelect
+  },
+  props: {
+    activeSection: Number, // 激活行index
+    activeProp: String // 激活的prop
   },
   inject: ['fg'],
   data () {
     return {
       // aside
-      activeSection: 0,
       activeLayout: [],
-      layouts: [
-        {
-          idx: 0,
-          span: [24]
-        },
-        {
-          idx: 1,
-          span: [12, 12]
-        }
-      ],
-      rowLayouts: [
-        [24],
-        [12, 12],
-        [8, 8, 8],
-        [6, 6, 6, 6],
-        [5, 5, 5, 5, 5],
-        [4, 4, 4, 4, 4, 4],
-        [9, 15],
-        [15, 9],
-        [8, 16],
-        [16, 8],
-        [6, 18],
-        [18, 6],
-        [6, 12, 6],
-        [4, 16, 4],
-        [6, 6, 12],
-        [12, 6, 6],
-        [4, 4, 16],
-        [16, 4, 4],
-        [4, 4, 4, 12],
-        [12, 4, 4, 4]
-      ],
       dragging: false,
       dragOptions: {
         animation: 200,
@@ -122,18 +70,17 @@ export default {
   computed: {
     colitemsGroup: {
       get  () {
-        return this.fg.layoutSections[this.activeSection]
+        return this.fg.layoutSections[this.activeSection] || []
       },
       set (val) {
         this.fg.layoutSections.splice(this.activeSection, 1, val)
       }
+    },
+    activeLayOut () {
+      return this.colitemsGroup.map(item => item.colGrid.span)
     }
   },
   methods: {
-    getRectWidth (item) {
-      const len = item.length
-      return (100 - len * 3) / len
-    },
     handleChangeLayout (data) {
       const initVal = data.map((val, idx) => {
         return {
@@ -146,10 +93,6 @@ export default {
     checkMove (e) {
       console.log('Future index: ' + e.draggedContext.futureIndex)
     },
-    handleAddColumn () {
-      // TODO 处理添加列业务逻辑
-      console.log('add column')
-    },
     handleRemoveColumn (element, colIndex) {
       const oldSection = {
         isCustom: 'btn-addCol',
@@ -157,14 +100,68 @@ export default {
       }
       this.fg.layoutSections[this.activeSection].splice(colIndex, 1, oldSection)
       this.$emit('deleteComp', element.prop)
+    },
+    onAddRow (data) {
+      const initVal = data.map((val, idx) => {
+        return {
+          colGrid: { span: val },
+          isCustom: 'btn-addCol'
+        }
+      })
+      this.fg.layoutSections.push(initVal)
+      let _activeSection = this.fg.layoutSections.length - 1
+      this.$emit('update:activeSection', _activeSection)
+      this.$emit('deleteComp', '')
+    },
+    onEditRow (data) {
+      let _result = data.map((grid, idx) => {
+        let _cur = this.colitemsGroup[idx]
+        if (_cur) {
+          return { ..._cur, colGrid: { span: grid } }
+        }
+        return { colGrid: { span: grid }, isCustom: 'btn-addCol' }
+      })
+      // 删除冗余的prop
+      if (data.length < this.colitemsGroup.length) {
+        let _delPart = this.colitemsGroup.slice(data.length)
+        _delPart.forEach(grid => {
+          this.delModuleAndOption(grid)
+        })
+      }
+      this.fg.layoutSections.splice(this.activeSection, 1, _result)
+      this.$emit('deleteComp', '')
+    },
+    delModuleAndOption (grid) {
+      //  删除module
+      if (this.fg.formModel.hasOwnProperty(grid.prop)) this.$delete(this.fg.formModel, grid.prop)
+      // 删除option
+      if (this.fg.formOptions.hasOwnProperty(grid.prop)) this.$delete(this.fg.formModel, grid.prop)
+    },
+    onDeleteRow () {
+      this.colitemsGroup.forEach(grid => {
+        this.delModuleAndOption(grid)
+      })
+      let _activeSection = this.activeSection === 0 ? 0 : this.activeSection - 1
+      this.fg.layoutSections.splice(this.activeSection, 1)
+      this.$emit('update:activeSection', _activeSection)
+      this.$emit('deleteComp', '')
     }
   }
 }
 </script>
 
 <style lang="less" scoped>
+@grey: #cfcbcb;
 .aside-layout {
   height: 800px;
+  &__rowEdit{
+    margin-bottom:12px;
+    display: flex;
+    justify-content: space-between;
+    // & > *:not(:last-child){
+    //   margin-right: 20px;
+    // }
+  }
   &__label {
     display: block;
     margin-bottom: 5px;
@@ -187,6 +184,9 @@ export default {
     position: relative;
     text-align: center;
     line-height: 1.5em;
+    &--active{
+      box-shadow: 0 0 10px @grey;
+    }
     .colitem-icon {
       display: inline-block;
       position: absolute;
