@@ -1,7 +1,11 @@
 <template>
   <div class="form-generator">
     <aside class="form-generator__aside">
-      <aside-panel @deleteComp="onDeleteComp"/>
+      <aside-panel
+        :activeSection.sync="activeSection"
+        :activeProp="activeProp"
+        @deleteComp="onDeleteComp"
+      />
     </aside>
     <main class="form-generator__main">
       <el-card class="main-layout">
@@ -10,12 +14,17 @@
           :label-position="formSettings.labelPosition"
           :size="formSettings.size"
           label-width="80px">
-          <schema-form
+          <main-panel
             :module="formModel"
             :schema="layoutSections"
             :options="formOptions"
-            :layout="formLayout">
-            <template #default="scope">
+            :layout="formLayout"
+            :activeSection="activeSection"
+            :activeProp="activeProp"
+            @changActiveRow="changActiveRow"
+            @changeActiveProp="changeActiveProp"
+          >
+            <template #moduleEdit="scope">
               <!-- 自定义 form item -->
               <div class="schema-form-item schema-form-item--custom">
                 <el-popover
@@ -35,32 +44,24 @@
                   <el-button type="primary" size="mini" icon="el-icon-plus" circle slot="reference"/>
                 </el-popover>
                 <template v-else>
-                  <span class="btn-removeCol">
-                    <el-button
-                      type="primary"
-                      size="mini"
-                      icon="el-icon-delete"
-                      circle
-                      @click="handleRemoveComponent(scope)"
-                    />
-                    <el-button
-                      type="primary"
-                      size="mini"
-                      icon="el-icon-edit"
-                      circle
-                      @click="handleEditComponent(scope)"
-                    />
-                  </span>
+                  <el-button
+                    type="primary"
+                    class="btn-removeCol"
+                    size="mini"
+                    icon="el-icon-delete"
+                    circle
+                    @click="handleRemoveComponent(scope)"
+                  />
                 </template>
               </div>
             </template>
-          </schema-form>
+          </main-panel>
         </el-form>
       </el-card>
     </main>
     <section class="form-generator__config-panel">
       <el-card class="config-panel-layout">
-        <config-panel ref="configPanel"/>
+        <config-panel @clearProp="onClearProp" ref="configPanel"/>
       </el-card>
     </section>
   </div>
@@ -69,13 +70,15 @@
 <script>
 import AsidePanel from './aside-panel'
 import ConfigPanel from './config-panel'
+import MainPanel from './main-panel'
 import { BASIC_COMPONENTS } from '@/constant/formGenerator'
 
 export default {
   name: 'FormGenerator',
   components: {
     AsidePanel,
-    ConfigPanel
+    ConfigPanel,
+    MainPanel
   },
   provide () {
     return {
@@ -98,7 +101,9 @@ export default {
         labelPosition: 'left',
         size: 'small'
       },
-      orderRecord: 0 // 每次生成向上迭代
+      orderRecord: 0, // 每次生成向上迭代
+      activeSection: 0, // 激活的行数
+      activeProp: '' // 激活的组件prop
     }
   },
   methods: {
@@ -142,18 +147,32 @@ export default {
         colGrid: col.colGrid
       }
       this.layoutSections[rowIndex].splice(colIndex, 1, oldSection)
-      this.onCompEdit('')
+      this.onDeleteComp(col.prop)
     },
-    handleEditComponent ({ col }) {
-      this.onCompEdit(col.prop)
-    },
-    onDeleteComp () {
+    onDeleteComp (prop) {
+      if (prop) {
+        //  删除module
+        if (prop && this.formModel.hasOwnProperty(prop)) this.$delete(this.formModel, prop)
+        // 删除option
+        if (prop && this.formOptions.hasOwnProperty(prop)) this.$delete(this.formOptions, prop)
+      }
       this.onCompEdit('')
     },
     onCompEdit (prop) {
       this.$nextTick(() => {
+        this.activeProp = prop
         this.$refs.configPanel.editCompAttr(prop)
       })
+    },
+    changActiveRow (rowIndex) {
+      this.activeSection = rowIndex
+      this.onCompEdit('')
+    },
+    changeActiveProp (prop) {
+      this.onCompEdit(prop)
+    },
+    onClearProp () {
+      this.activeProp = ''
     }
   }
 }
@@ -203,16 +222,6 @@ export default {
       align-items: center;
       margin: -2px;
       padding: 20px;
-      transition-duration: .33s;
-      transition-property: box-shadow;
-      box-shadow:
-        inset 0 0 0 2px transparent,
-        0 0 1px rgba(0, 0, 0, 0);
-      &:hover {
-        box-shadow:
-          inset 0 0 0 2px @yellow,
-          0 0 1px rgba(0, 0, 0, 0);
-      }
       .el-col {
         padding: 20px;
         transition: .33s all;
@@ -227,7 +236,15 @@ export default {
             inset 0 0 0 2px @pink,
             0 0 1px rgba(0, 0, 0, 0);
         }
+        &--active{
+           box-shadow:
+            inset 0 0 0 2px @pink,
+            0 0 1px rgba(0, 0, 0, 0);
+        }
       }
+    }
+    &__row--active.el-row{
+       box-shadow: 0 0 10px #cfcbcb;
     }
   }
   .schema-form-item--custom {

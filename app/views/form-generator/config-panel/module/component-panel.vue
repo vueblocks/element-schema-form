@@ -89,7 +89,7 @@ export default {
       return true
     },
     reset () {
-      this.$emit('update:editProp', '')
+      this.$emit('success')
       this.lastProp = ''
       this.editInfo = {
         formItem: {}
