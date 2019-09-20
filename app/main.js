@@ -1,18 +1,42 @@
 import Vue from 'vue'
+
+import 'normalize.css'
+
 import App from './App.vue'
 import router from './router'
 import store from './store'
 
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
+// 引入codeMirror的样式
+import 'codemirror/theme/cobalt.css'
+import 'codemirror/mode/javascript/javascript.js'
 
-import SchemaForm from '../src/index'
-import FormSwitch from './components/form-switch/index.vue'
+import SchemaForm, { SchemaFormItem, SchemaFormJsoneditor, SchemaFormQuill, SchemaFormCodemirror } from '../src/index'
 
-Vue.component('FormSwitch', FormSwitch)
+Vue.use(ElementUI, {
+  size: 'small'
+})
+Vue.component('SchemaFormJsoneditor', SchemaFormJsoneditor)
+Vue.component('SchemaFormQuill', SchemaFormQuill)
 
-Vue.use(ElementUI)
-Vue.use(SchemaForm)
+Vue.component('SchemaFormCodemirror', SchemaFormCodemirror)
+Vue.component('SchemaFormItem', SchemaFormItem)
+
+Vue.use(SchemaForm, {
+  'codemirror': {
+    cmOptions: {
+      tabSize: 2,
+      mode: 'text/javascript',
+      theme: 'cobalt',
+      lineNumbers: true,
+      line: true
+    }
+  },
+  input: {
+    placeholder: '全局定义变量实验'
+  }
+})
 
 Vue.config.productionTip = false
 

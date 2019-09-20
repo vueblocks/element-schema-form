@@ -5,7 +5,14 @@ export const module = {
   sex: 'male',
   expire: '',
   location: [],
-  isOn: false
+  isOn: false,
+  city: ['beijing'],
+  sliderVal: 60,
+  sleepTime: '',
+  star: 0,
+  color: '#409EFF',
+  label: ['小清新'],
+  percent: 20
 }
 export const schema = [
   [
@@ -13,6 +20,7 @@ export const schema = [
       type: 'input',
       prop: 'name',
       formItem: { label: '姓名' },
+      attrs: { placeholder: '测试优先级' },
       colGrid: { span: 8 }
     }, {
       type: 'input',
@@ -49,9 +57,45 @@ export const schema = [
       formItem: { label: '地域' },
       attrs: { 'show-all-levels': false }
     }, {
-      type: 'FormSwitch',
+      type: 'switch',
       prop: 'isOn',
       formItem: { label: '开关' }
+    }, {
+      type: 'checkbox',
+      prop: 'city',
+      formItem: { label: '地域' }
+    }
+  ],
+  [
+    {
+      type: 'slider',
+      prop: 'sliderVal',
+      formItem: { label: '成绩' },
+      attrs: { 'show-stops': true, step: 10 }
+    }, {
+      type: 'timeselect',
+      prop: 'sleepTime',
+      formItem: { label: '晚睡时间' }
+    }, {
+      type: 'rate',
+      prop: 'star',
+      formItem: { label: '观影得分' }
+    }
+  ],
+  [
+    {
+      type: 'colorpicker',
+      prop: 'color',
+      formItem: { label: '颜色' }
+    }, {
+      type: 'tags',
+      prop: 'label',
+      formItem: { label: '标签' },
+      attrs: { size: 'medium', buttonSize: 'mini' }
+    }, {
+      type: 'progress',
+      prop: 'percent',
+      formItem: { label: '进度' }
     }
   ]
 ]
@@ -61,5 +105,10 @@ export const options = {
   location: [
     { label: '北京', value: 'beijing', children: [{ label: '通州', value: 'tongzhou' }] },
     { label: '天津', value: 'tianjin' }
+  ],
+  city: [
+    { label: '北京', value: 'beijing' },
+    { label: '上海', value: 'shanghai' },
+    { label: '广州', value: '广州', disabled: true }
   ]
 }

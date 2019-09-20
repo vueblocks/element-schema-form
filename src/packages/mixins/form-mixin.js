@@ -1,6 +1,6 @@
 export default {
   props: {
-    value: [Number, String, Array, Object, Boolean], // 绑定值
+    value: [Number, String, Array, Object, Boolean, Date], // 绑定值
     prop: String,
     modifier: String, // v-model修饰符
     dynamicAttrs: Object, // 动态属性
@@ -19,8 +19,15 @@ export default {
         this.$emit('update:value', this.formatVal(val))
       }
     },
+    componentName () {
+      let _name = this.$options.name
+      return _name.replace('SchemaForm', '').toLowerCase() || ''
+    },
+    globalOptions () {
+      return this.$globalParams[this.componentName] || {}
+    },
     attrsAll () {
-      return { ...this.$attrs, ...this.dynamicAttrs }
+      return { ...this.globalOptions, ...this.$attrs, ...this.dynamicAttrs }
     }
   },
   methods: {

@@ -1,22 +1,22 @@
 <template>
-  <el-switch
+  <el-time-select
     v-model="bindVal"
     v-bind="attrsAll"
     v-on="onEvents"
     @change="$emit('change', { prop, value: $event })"
   >
-  </el-switch>
+  </el-time-select>
 </template>
 
 <script>
-import { FormMixin } from '../../../src/index.js'
+import FormMixin from '../mixins/form-mixin'
 
 export default {
-  name: 'FormSwitch',
+  name: 'SchemaFormTimeselect',
   mixins: [FormMixin]
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="less" scoped>
 
 </style>

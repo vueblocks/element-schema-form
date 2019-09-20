@@ -1,28 +1,34 @@
 <template>
-  <div>
-    <el-form :module="module" label-width="80px">
+  <div class="page-form">
+    <el-form :model="module" label-width="80px">
       <schema-form
         :module="module"
-        :schema="schema"
+        :schema="formSchema"
         :options="options"
       >
       </schema-form>
     </el-form>
+    <div class="page-footer">
+      <el-button type="primary" @click="handleAddRow">新增</el-button>
+    </div>
   </div>
 </template>
 
 <script>
 import { module, schema, options } from './const.js'
+
 export default {
+  name: 'TestPage',
   data () {
     return {
       module,
-      options
+      options,
+      schema
     }
   },
   computed: {
-    schema () {
-      return schema.map(list => {
+    formSchema () {
+      return this.schema.map(list => {
         return list.map(item => {
           if (item.prop === 'phone') return { ...item, on: { blur: this.onSelectBlur } }
           return item
@@ -33,6 +39,14 @@ export default {
   methods: {
     onSelectBlur (val) {
       console.log('val: ', val)
+    },
+    handleAddRow () {
+      this.schema.push([{
+        type: 'input',
+        prop: 'phone',
+        formItem: { label: '联系电话' },
+        colGrid: { span: 8 }
+      }])
     }
   }
 }
