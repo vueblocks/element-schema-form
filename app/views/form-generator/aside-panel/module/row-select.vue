@@ -10,7 +10,7 @@
         <div class="row-select__des">{{des}}</div>
       </div>
       <el-dropdown-menu slot="dropdown">
-        <div style="overflow-y:auto;max-height:200px">
+        <div style="overflow-y:auto;">
           <el-dropdown-item
             v-for="(layout, index) in activeRowLayouts"
             :key="index"
@@ -19,12 +19,12 @@
               <template v-for="(item, idx) in layout">
                 <rect
                   :key="idx"
-                  :width="`${getRectWidth(layout)}%`"
+                  :width="`${getRectWidth(layout, idx)}%`"
                   height="20"
                   y="5"
                   rx="5"
                   ry="5"
-                  :x="idx === 0 ? '0%' : `${(getRectWidth(layout) + 3) * idx}%`"
+                  :x="`${getX(layout, idx)}%`"
                 />
               </template>
             </svg>
@@ -37,6 +37,9 @@
 
 <script>
 import isEqual from 'lodash.isequal'
+
+const COL_SPAN = 24
+
 export default {
   inject: ['fg'],
   props: {
@@ -84,9 +87,25 @@ export default {
     }
   },
   methods: {
-    getRectWidth (item) {
-      const len = item.length
-      return (100 - len * 3) / len
+    getRectWidth (layout, idx) {
+      const len = layout.length
+      const space = 100 - (len - 1) * 3
+
+      const rect = layout[idx]
+      const percent = rect * space / COL_SPAN
+
+      return percent
+    },
+    getX (layout, idx) {
+      if (idx === 0) return 0
+      const len = layout.length
+      const space = 100 - (len - 1) * 3
+
+      const prevRectWidth = layout.slice(0, idx).reduce((a, b) => a + b)
+      const percent = prevRectWidth * space / COL_SPAN
+
+      const x = percent + idx * 3
+      return x
     },
     handleCommand (data) {
       this.$emit('editRow', data)
