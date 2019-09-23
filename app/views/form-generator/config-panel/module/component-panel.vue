@@ -17,8 +17,8 @@
           <el-input v-model="editInfo.prop"></el-input>
         </div>
       </figure>
-      <el-button type="primary" @click="onConfirm" :disabled="!editInfo.prop">确定</el-button>
     </fieldset>
+    <el-button type="primary" @click="onConfirm" :disabled="!editInfo.prop">确定</el-button>
   </section>
 </template>
 

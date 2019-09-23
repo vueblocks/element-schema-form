@@ -24,12 +24,16 @@
             :class="{'aside-layout__colitem--active': element.prop === activeProp}"
           >
             <template v-if="element.prop">
+              <span>{{ element.colGrid ? element.colGrid.span : '' }}</span>
               <span>{{ element.prop }}</span>
               <div class="colitem-icon colitem-icon--delete" @click="handleRemoveColumn(element, idx)">
                 <svg viewBox="0 0 28 28" preserveAspectRatio="xMidYMid meet" shape-rendering="geometricPrecision">
                   <g><path d="M19 9h-3V8a1 1 0 0 0-1-1h-2a1 1 0 0 0-1 1v1H9a1 1 0 1 0 0 2h10a1 1 0 0 0 .004-2H19zM9 20c.021.543.457.979 1 1h8c.55-.004.996-.45 1-1v-7H9v7zm2.02-4.985h2v4h-2v-4zm4 0h2v4h-2v-4z" fill-rule="evenodd"></path></g>
                 </svg>
               </div>
+            </template>
+            <template v-else>
+              <span>{{ element.colGrid ? element.colGrid.span : '' }}</span>
             </template>
           </li>
         </transition-group>
@@ -182,15 +186,14 @@ export default {
     border-radius: 3px;
     padding: 10px;
     position: relative;
-    text-align: center;
+    display: flex;
+    justify-content:space-between;
     line-height: 1.5em;
     &--active{
       box-shadow: 0 0 10px @grey;
     }
     .colitem-icon {
       display: inline-block;
-      position: absolute;
-      right: 16px;
       transition: fill .2s ease;
       cursor: pointer;
     }

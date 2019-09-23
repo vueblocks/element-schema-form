@@ -8,7 +8,7 @@
       />
     </aside>
     <main class="form-generator__main">
-      <el-card class="main-layout">
+      <el-card class="main-layout" @click.native.self="onResetActive">
         <el-form
           :model="formModel"
           :label-position="formSettings.labelPosition"
@@ -43,16 +43,6 @@
                   </ul>
                   <el-button type="primary" size="mini" icon="el-icon-plus" circle slot="reference"/>
                 </el-popover>
-                <template v-else>
-                  <el-button
-                    type="primary"
-                    class="btn-removeCol"
-                    size="mini"
-                    icon="el-icon-delete"
-                    circle
-                    @click="handleRemoveComponent(scope)"
-                  />
-                </template>
               </div>
             </template>
           </main-panel>
@@ -61,7 +51,10 @@
     </main>
     <section class="form-generator__config-panel">
       <el-card class="config-panel-layout">
-        <config-panel @clearProp="onClearProp" ref="configPanel"/>
+        <config-panel
+          :activeProp="activeProp"
+          @clearProp="onClearProp"
+          ref="configPanel"/>
       </el-card>
     </section>
   </div>
@@ -140,15 +133,6 @@ export default {
       // 编辑弹窗
       this.onCompEdit(`default_${_propIdx}`)
     },
-    handleRemoveComponent (scope) {
-      const { col, rowIndex, colIndex } = scope
-      const oldSection = {
-        isCustom: 'btn-addCol',
-        colGrid: col.colGrid
-      }
-      this.layoutSections[rowIndex].splice(colIndex, 1, oldSection)
-      this.onDeleteComp(col.prop)
-    },
     onDeleteComp (prop) {
       if (prop) {
         //  删除module
@@ -161,7 +145,7 @@ export default {
     onCompEdit (prop) {
       this.$nextTick(() => {
         this.activeProp = prop
-        this.$refs.configPanel.editCompAttr(prop)
+        // this.$refs.configPanel.editCompAttr(prop)
       })
     },
     changActiveRow (rowIndex) {
@@ -173,6 +157,9 @@ export default {
     },
     onClearProp () {
       this.activeProp = ''
+    },
+    onResetActive () {
+      this.activeProp = ''
     }
   }
 }
@@ -181,6 +168,7 @@ export default {
 <style lang="less">
 @yellow: #fa4;
 @pink: #f4a;
+@grey: #cfcbcb;
 
 .component-basic {
   display: flex;
@@ -213,49 +201,6 @@ export default {
     white-space: nowrap;
     text-overflow: ellipsis;
     cursor: pointer;
-  }
-}
-.form-generator {
-  .schema-form {
-    &__row.el-row {
-      display: flex;
-      align-items: center;
-      margin: -2px;
-      padding: 20px;
-      .el-col {
-        padding: 20px;
-        transition: .33s all;
-        box-shadow:
-          inset 0 0 0 2px transparent,
-          0 0 1px rgba(0, 0, 0, 0);
-        &:hover {
-          .btn-removeCol {
-            display: block;
-          }
-          box-shadow:
-            inset 0 0 0 2px @pink,
-            0 0 1px rgba(0, 0, 0, 0);
-        }
-        &--active{
-           box-shadow:
-            inset 0 0 0 2px @pink,
-            0 0 1px rgba(0, 0, 0, 0);
-        }
-      }
-    }
-    &__row--active.el-row{
-       box-shadow: 0 0 10px #cfcbcb;
-    }
-  }
-  .schema-form-item--custom {
-    .btn-removeCol {
-      display: none;
-      position: absolute;
-      bottom: 7px;
-    }
-  }
-  .schema-form-item--custom + .el-form-item {
-    margin-bottom: 0;
   }
 }
 </style>
