@@ -59,7 +59,7 @@
         </fieldset>
       </el-tab-pane>
       <el-tab-pane label="组件属性" name="componentSetting">
-        <component-panel :editProp.sync="editProp" @success="onClearProp"/>
+        <component-panel :editProp="activeProp" @success="onClearProp"/>
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -73,17 +73,20 @@ export default {
   components: {
     ComponentPanel
   },
+  props: {
+    activeProp: String // 当前激活prop
+  },
   data () {
     return {
-      activeTab: 'formSetting',
-      editProp: ''
+      activeTab: 'formSetting'
+    }
+  },
+  watch: {
+    activeProp (val) {
+      if (val) this.activeTab = 'componentSetting'
     }
   },
   methods: {
-    editCompAttr (prop) {
-      this.editProp = prop || ''
-      this.activeTab = 'componentSetting'
-    },
     onClearProp () {
       this.$emit('clearProp')
     }
