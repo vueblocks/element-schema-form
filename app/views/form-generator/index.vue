@@ -99,7 +99,7 @@ export default {
       },
       formControl: {
         showGrid: false,
-        showLayout: true
+        showLayout: false
       },
       orderRecord: 0, // 每次生成向上迭代
       activeSection: 0, // 激活的行数

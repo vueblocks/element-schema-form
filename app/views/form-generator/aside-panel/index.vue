@@ -140,7 +140,7 @@ export default {
       //  删除module
       if (this.fg.formModel.hasOwnProperty(grid.prop)) this.$delete(this.fg.formModel, grid.prop)
       // 删除option
-      if (this.fg.formOptions.hasOwnProperty(grid.prop)) this.$delete(this.fg.formModel, grid.prop)
+      if (this.fg.formOptions.hasOwnProperty(grid.prop)) this.$delete(this.fg.formOptions, grid.prop)
     },
     onDeleteRow () {
       this.colitemsGroup.forEach(grid => {

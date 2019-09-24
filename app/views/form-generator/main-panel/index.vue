@@ -12,15 +12,25 @@
         'schema-form__row--layout': showLayout
       }"
       :key="rowIndex"
-      @click.native.self="changActiveRow(rowIndex)"
     >
       <!-- 行蒙层 -->
-      <section v-if="(showGrid && rowIndex === activeSection) || showLayout" class="schema-form__row__grid">
+      <section
+        v-if="(showGrid && rowIndex === activeSection) || showLayout"
+        class="schema-form__row__grid"
+        :class="{'schema-form__row__grid--active': rowIndex === activeSection}"
+        @click.self.stop="changActiveRow(rowIndex)"
+      >
         <!-- 设置栅格 -->
         <grid-setting
           v-if="rowIndex === activeSection && showGrid"
           :activeRow="activeSection"
           :schema="formatedSchema"
+        />
+        <!-- 行操作 -->
+        <row-setting
+          v-if="rowIndex === activeSection && showLayout"
+          :activeRow="activeSection"
+          @delRowSuccess="onDelRowSuccess"
         />
       </section>
       <template v-for="(col, colIndex) in row">
@@ -53,12 +63,14 @@
 <script>
 import { LayoutMixin } from '@lib/index.js'
 import GridSetting from './module/grid-setting'
+import RowSetting from './module/row-setting'
 
 export default {
   mixins: [LayoutMixin],
   inject: ['fg'],
   components: {
-    GridSetting
+    GridSetting,
+    RowSetting
   },
   props: {
     activeSection: Number, // 激活行数
@@ -84,6 +96,9 @@ export default {
     async changeActiveProp (rowIndex, { prop }) {
       await this.$emit('changActiveRow', rowIndex)
       this.$emit('changeActiveProp', prop || '')
+    },
+    onDelRowSuccess ({ activeRow }) {
+      this.$emit('changActiveRow', activeRow)
     }
   }
 }
@@ -93,6 +108,7 @@ export default {
 @yellow: #fa4;
 @pink: #f4a;
 @grey: #cfcbcb;
+@blue: #409eff;
 .schema-form {
   &__row{
     &__grid{
@@ -103,9 +119,22 @@ export default {
       bottom:0;
       background: rgba(0,0,0,.5);
       z-index:1120;
+      border:2px solid transparent;
+      cursor: pointer;
+      &--active{
+        border-color: @blue;
+      }
     }
     &--layout{
-      margin-bottom:20px;
+      margin-bottom:10px;
+      div.el-col {
+        &:not(:last-child) {
+          border-right: 1px dotted #000;
+        }
+        .schema-form-item--custom{
+          opacity: 0;
+        }
+      }
     }
     .el-col {
       padding: 18px 2px 0 ;
@@ -134,7 +163,7 @@ export default {
       }
     }
   }
-  &__row--active.schema-form__row--grid {
+  &__row--active.schema-form__row--grid{
     .el-col {
       &--active{
         box-shadow: inset 0 0 0 2px transparent, 0 0 1px rgba(0, 0, 0, 0);
