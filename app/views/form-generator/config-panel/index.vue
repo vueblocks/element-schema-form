@@ -7,11 +7,11 @@
           <figcaption class="config-panel__figcaption">
             <span>表单属性</span>
           </figcaption>
-          <!-- 对齐方式 -->
+          <!-- 标签位置 -->
           <figure class="config-panel__figure">
             <el-row type="flex" align="middle">
               <el-col :span="6" class="figure-label">
-                <label for="">对齐方式</label>
+                <label for="">标签位置</label>
               </el-col>
               <el-col :span="18" class="figure-control">
                 <el-radio-group v-model="fg.formSettings.labelPosition" size="mini">
@@ -19,6 +19,17 @@
                   <el-radio-button label="right">右</el-radio-button>
                   <el-radio-button label="top">顶部</el-radio-button>
                 </el-radio-group>
+              </el-col>
+            </el-row>
+          </figure>
+          <!-- 标签宽度 -->
+          <figure class="config-panel__figure">
+            <el-row type="flex" align="middle">
+              <el-col :span="6" class="figure-label">
+                <label for="">标签宽度</label>
+              </el-col>
+              <el-col :span="18" class="figure-control">
+                <el-input v-model.number="labelWidth" />
               </el-col>
             </el-row>
           </figure>
@@ -43,7 +54,7 @@
           <figcaption class="config-panel__figcaption">
             <span>栅格布局</span>
           </figcaption>
-          <!-- 对齐方式 -->
+          <!-- 栅格间隔 -->
           <figure class="config-panel__figure">
             <el-row type="flex" align="middle">
               <el-col :span="6" class="figure-label">
@@ -52,6 +63,46 @@
               <el-col :span="17" class="figure-control">
                 <el-slider v-model="fg.formLayout.gutter" :max="72">
                 </el-slider>
+              </el-col>
+              <el-col :span="1"></el-col>
+            </el-row>
+          </figure>
+            <!-- 对齐方式 -->
+          <figure class="config-panel__figure">
+            <el-row type="flex" align="middle">
+              <el-col :span="6" class="figure-label">
+                <label for="row-gutter">对齐方式</label>
+              </el-col>
+              <el-col :span="19" class="figure-control">
+                <el-radio-group v-model="fg.formLayout.justify" size="mini">
+                  <el-radio-button label="start">左</el-radio-button>
+                  <el-radio-button label="end">右</el-radio-button>
+                  <el-radio-button label="center">居中</el-radio-button>
+                </el-radio-group>
+              </el-col>
+              <el-col :span="1"></el-col>
+            </el-row>
+          </figure>
+          <!-- 显示栅格 -->
+          <figure class="config-panel__figure">
+            <el-row type="flex" align="middle">
+              <el-col :span="6" class="figure-label">
+                <label for="row-gutter">显示栅格</label>
+              </el-col>
+              <el-col :span="17" class="figure-control">
+                <el-switch v-model="fg.formControl.showGrid" />
+              </el-col>
+              <el-col :span="1"></el-col>
+            </el-row>
+          </figure>
+          <!-- 显示布局 -->
+          <figure class="config-panel__figure">
+            <el-row type="flex" align="middle">
+              <el-col :span="6" class="figure-label">
+                <label for="row-gutter">显示布局</label>
+              </el-col>
+              <el-col :span="17" class="figure-control">
+                <el-switch v-model="fg.formControl.showLayout" />
               </el-col>
               <el-col :span="1"></el-col>
             </el-row>
@@ -79,6 +130,16 @@ export default {
   data () {
     return {
       activeTab: 'formSetting'
+    }
+  },
+  computed: {
+    labelWidth: {
+      get () {
+        return parseFloat(this.fg.formSettings.labelWidth)
+      },
+      set (val) {
+        this.fg.formSettings.labelWidth = val + 'px'
+      }
     }
   },
   watch: {

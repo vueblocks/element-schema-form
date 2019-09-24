@@ -46,14 +46,16 @@ export default {
     setPosition (pos) {
       let _step = 100 / 24
       let _num = Math.round(pos / _step)
-      if (_num <= 0) _num = 0
-      if (_num >= 24) _num = 24
+      // 滑块移动范围
+      let _cloneLayout = [...this.activeLayout]
+      let _prev = _cloneLayout[this.index - 1] ? _cloneLayout.slice(0, this.index).reduce((sum, b) => { return sum + b }, 0) : 0
+      let _after = _cloneLayout[this.index] ? _cloneLayout.slice(0, this.index + 2).reduce((sum, b) => { return sum + b }, 0) : 24
+      if (_num <= _prev + 1) _num = _prev + 1
+      if (_num >= _after - 1) _num = _after - 1
+      // let _cloneLayout[this.index - 1]
       // 占用分数出现变化之后进行调节
       if (this.step !== _num) {
         // 计算新的布局 index=0 第一个滑块只对后一位产生影响 [8,8,8] => [9,7,6]
-        let _cloneLayout = [...this.activeLayout]
-        // 当前按钮前的加和
-        let _prev = _cloneLayout[this.index - 1] ? _cloneLayout.slice(0, this.index).reduce((sum, b) => { return sum + b }, 0) : 0
         _num = _num - _prev
         // 计算差和 更新数据
         let _diff = _cloneLayout[this.index] - _num

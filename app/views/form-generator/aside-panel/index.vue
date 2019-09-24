@@ -22,6 +22,7 @@
             v-for="(element, idx) in colitemsGroup"
             :key="element.prop || idx"
             :class="{'aside-layout__colitem--active': element.prop === activeProp}"
+            @click="onEditComp(element.prop)"
           >
             <template v-if="element.prop">
               <span>{{ element.colGrid ? element.colGrid.span : '' }}</span>
@@ -149,6 +150,9 @@ export default {
       this.fg.layoutSections.splice(this.activeSection, 1)
       this.$emit('update:activeSection', _activeSection)
       this.$emit('deleteComp', '')
+    },
+    onEditComp (prop) {
+      this.$emit('editComp', prop || '')
     }
   }
 }

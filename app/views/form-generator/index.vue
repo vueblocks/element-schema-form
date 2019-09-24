@@ -5,6 +5,7 @@
         :activeSection.sync="activeSection"
         :activeProp="activeProp"
         @deleteComp="onDeleteComp"
+        @editComp="onCompEdit"
       />
     </aside>
     <main class="form-generator__main">
@@ -13,7 +14,7 @@
           :model="formModel"
           :label-position="formSettings.labelPosition"
           :size="formSettings.size"
-          label-width="80px">
+          :label-width="formSettings.labelWidth">
           <main-panel
             :module="formModel"
             :schema="layoutSections"
@@ -87,12 +88,18 @@ export default {
       formOptions: {},
       // 表单设置 - 栅格布局
       formLayout: {
-        gutter: 16
+        gutter: 0,
+        justify: 'start'
       },
       // 表单设置 - 表单属性
       formSettings: {
         labelPosition: 'left',
-        size: 'small'
+        size: 'small',
+        labelWidth: '80px'
+      },
+      formControl: {
+        showGrid: false,
+        showLayout: true
       },
       orderRecord: 0, // 每次生成向上迭代
       activeSection: 0, // 激活的行数
@@ -101,13 +108,7 @@ export default {
   },
   methods: {
     handleAddComponent (comp, scope) {
-      const { col, rowIndex, colIndex } = scope
-      console.group('---- ---- ----')
-      console.log(comp)
-      console.log(col)
-      console.log('row', rowIndex)
-      console.log('col', colIndex)
-      console.groupEnd()
+      const { rowIndex, colIndex } = scope
       // 设定组件类型
       let _propIdx = this.orderRecord += 1
       let _component = {
