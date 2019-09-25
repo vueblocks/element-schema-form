@@ -22,6 +22,7 @@
             v-for="(element, idx) in colitemsGroup"
             :key="element.prop || idx"
             :class="{'aside-layout__colitem--active': element.prop === activeProp}"
+            @click="onEditComp(element.prop)"
           >
             <template v-if="element.prop">
               <span>{{ element.colGrid ? element.colGrid.span : '' }}</span>
@@ -139,7 +140,7 @@ export default {
       //  删除module
       if (this.fg.formModel.hasOwnProperty(grid.prop)) this.$delete(this.fg.formModel, grid.prop)
       // 删除option
-      if (this.fg.formOptions.hasOwnProperty(grid.prop)) this.$delete(this.fg.formModel, grid.prop)
+      if (this.fg.formOptions.hasOwnProperty(grid.prop)) this.$delete(this.fg.formOptions, grid.prop)
     },
     onDeleteRow () {
       this.colitemsGroup.forEach(grid => {
@@ -149,6 +150,9 @@ export default {
       this.fg.layoutSections.splice(this.activeSection, 1)
       this.$emit('update:activeSection', _activeSection)
       this.$emit('deleteComp', '')
+    },
+    onEditComp (prop) {
+      this.$emit('editComp', prop || '')
     }
   }
 }

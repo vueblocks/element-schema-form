@@ -57,7 +57,7 @@ export default {
         [12, 12],
         [8, 8, 8],
         [6, 6, 6, 6],
-        [5, 5, 5, 5, 5],
+        [5, 5, 4, 5, 5],
         [4, 4, 4, 4, 4, 4],
         [9, 15],
         [15, 9],
@@ -78,7 +78,7 @@ export default {
   },
   computed: {
     des () {
-      let _des = { addRow: '新增行', editRow: '编辑列', deleteRow: '删除行' }
+      let _des = { addRow: '新增行', editRow: '编辑行', deleteRow: '删除行' }
       return _des[this.type]
     },
     activeRowLayouts () {

@@ -17,6 +17,12 @@
           <el-input v-model="editInfo.prop"></el-input>
         </div>
       </figure>
+      <figure class="component-panel__figure">
+        <label class="figure-label">栅格数:</label>
+        <div class="figure-control">
+          <el-input v-model.number="editInfo.colGrid.span"></el-input>
+        </div>
+      </figure>
     </fieldset>
     <el-button type="primary" @click="onConfirm" :disabled="!editInfo.prop">确定</el-button>
   </section>
@@ -37,7 +43,8 @@ export default {
     return {
       lastProp: '', // 编辑前prop信息
       editInfo: {
-        formItem: {}
+        formItem: {},
+        colGrid: {}
       }
     }
   },
@@ -83,7 +90,7 @@ export default {
     },
     validateEdit () {
       if (this.editInfo.prop !== this.lastProp && this.fg.formModel.hasOwnProperty(this.editInfo.prop)) {
-        this.$message.error('数据字段已存在，请重新设置')
+        this.$message.error('数据字段已存在，请重新编辑数据字段')
         return false
       }
       return true
@@ -92,7 +99,8 @@ export default {
       this.$emit('success')
       this.lastProp = ''
       this.editInfo = {
-        formItem: {}
+        formItem: {},
+        colGrid: {}
       }
     }
   }

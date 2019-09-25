@@ -96,7 +96,8 @@ export default {
   width: 100%;
   position: absolute;
   left: 0;
-  top:5px;
+  top:50%;
+  transform: translate(0, -50%);
   &__slider {
     width: 100%;
     height: 6px;
