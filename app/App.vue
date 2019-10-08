@@ -1,5 +1,5 @@
 <template>
-  <el-container>
+  <el-container style="height: 100%;">
     <el-header style="padding: 0;">
       <el-menu
         class="el-menu--form-generator"
@@ -15,7 +15,7 @@
         <el-menu-item index="3" route="/form-generator">表单生成器</el-menu-item>
       </el-menu>
     </el-header>
-  <el-main>
+  <el-main  style="padding: 0;">
     <router-view></router-view>
   </el-main>
 </el-container>

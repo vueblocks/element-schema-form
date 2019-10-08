@@ -1,6 +1,6 @@
 <template>
   <div class="schema-form">
-      <!-- 表单 -->
+    <!-- 表单 -->
     <el-row
       v-bind="layout"
       type="flex"

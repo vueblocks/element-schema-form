@@ -1,5 +1,5 @@
 <template>
-  <el-card class="aside-layout">
+  <el-card class="aside-layout" shadow="never">
     <label for="aside-layout" class="aside-layout__label">布局操作</label>
     <section class="aside-layout__rowEdit">
       <row-select type="addRow" @editRow="onAddRow"/>
@@ -161,7 +161,7 @@ export default {
 <style lang="less" scoped>
 @grey: #cfcbcb;
 .aside-layout {
-  height: 800px;
+  height: 100%;
   &__rowEdit{
     margin-bottom:12px;
     display: flex;

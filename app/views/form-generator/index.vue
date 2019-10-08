@@ -9,7 +9,7 @@
       />
     </aside>
     <main class="form-generator__main">
-      <el-card class="main-layout" @click.native.self="onResetActive">
+      <el-card class="main-layout" @click.native.self="onResetActive" shadow="never">
         <el-form
           :model="formModel"
           :label-position="formSettings.labelPosition"
@@ -51,7 +51,7 @@
       </el-card>
     </main>
     <section class="form-generator__config-panel">
-      <el-card class="config-panel-layout">
+      <el-card class="config-panel-layout" shadow="never">
         <config-panel
           :activeProp="activeProp"
           @clearProp="onClearProp"
@@ -210,6 +210,7 @@ export default {
 .form-generator {
   display: flex;
   width: 100%;
+  height: 100%;
   &__aside {
     width: 240px;
   }
@@ -217,7 +218,7 @@ export default {
     margin-left: 20px;
     flex: 1;
     .main-layout {
-      height: 800px;
+      height: 100%;
       &__section {
         display: flex;
         justify-content: space-around;
@@ -241,7 +242,7 @@ export default {
     margin-left: 20px;
     width: 336px;
     .config-panel-layout {
-      height: 800px;
+      height: 100%;
     }
   }
   .flip-list-move {
