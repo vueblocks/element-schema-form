@@ -286,6 +286,7 @@ export default {
     width: 336px;
     .config-panel-layout {
       height: 100%;
+      border: 1px solid @primary;
     }
   }
   .flip-list-move {

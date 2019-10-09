@@ -1,12 +1,12 @@
 <template>
   <section>
     <div class="row-select" v-if="type === 'deleteRow'">
-      <el-button type="primary" size="mini" icon="el-icon-plus" circle @click="$emit('deleteRow')"></el-button>
+      <el-button type="primary" size="mini" icon="el-icon-delete" circle @click="$emit('deleteRow')"></el-button>
       <div class="row-select__des">{{des}}</div>
     </div>
     <el-dropdown trigger="click" @command="handleCommand" v-else>
       <div class="row-select">
-        <el-button type="primary" size="mini" icon="el-icon-plus" circle></el-button>
+        <el-button type="primary" size="mini" :icon="type === 'addRow' ? 'el-icon-plus': 'el-icon-edit'" circle></el-button>
         <div class="row-select__des">{{des}}</div>
       </div>
       <el-dropdown-menu slot="dropdown">
