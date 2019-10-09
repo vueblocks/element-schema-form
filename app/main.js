@@ -1,13 +1,14 @@
 import Vue from 'vue'
 
 import 'normalize.css'
+import './plugins/json-viewer'
 
 import App from './App.vue'
 import router from './router'
 import store from './store'
 
 import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css'
+import './theme/index.css'
 // 引入codeMirror的样式
 import 'codemirror/theme/cobalt.css'
 import 'codemirror/mode/javascript/javascript.js'
