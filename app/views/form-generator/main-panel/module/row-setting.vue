@@ -66,7 +66,8 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@blue: #409eff;
+@primary: #7367f0;
+
 .row-setting{
   position: absolute;
   bottom:0;
@@ -74,7 +75,7 @@ export default {
   width: 40px;
   padding: 0 5px;
   height: 20px;
-  background: @blue;
+  background: @primary;
   font-size:16px;
   color: #fff;
   display: flex;

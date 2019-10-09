@@ -1,6 +1,8 @@
 <template>
   <el-card class="aside-layout" shadow="never">
-    <label for="aside-layout" class="aside-layout__label">布局操作</label>
+    <div slot="header" class="aside-layout__header clearfix">
+      <div style="line-height: 28px;">布局操作</div>
+    </div>
     <section class="aside-layout__rowEdit">
       <row-select type="addRow" @editRow="onAddRow"/>
       <row-select type="editRow" :activeLayOut="activeLayOut" @editRow="onEditRow"/>
@@ -158,22 +160,35 @@ export default {
 }
 </script>
 
+<style lang="less">
+@primary: #7367f0;
+
+.aside-layout {
+  .el-card__header {
+    background-color: @primary;
+    padding: 6px 12px;
+  }
+}
+</style>
+
 <style lang="less" scoped>
+@primary: #7367f0;
 @grey: #cfcbcb;
+
 .aside-layout {
   height: 100%;
-  &__rowEdit{
+  border: 1px solid @primary;
+  &__header {
+    font-size: 14px;
+    color: #ffffff;
+  }
+  &__rowEdit {
     margin-bottom:12px;
     display: flex;
     justify-content: space-between;
     // & > *:not(:last-child){
     //   margin-right: 20px;
     // }
-  }
-  &__label {
-    display: block;
-    margin-bottom: 5px;
-    font-size: 14px;
   }
   &__colitems-wrap {
     margin-top: 20px;

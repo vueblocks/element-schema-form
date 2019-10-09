@@ -10,6 +10,14 @@
     </aside>
     <main class="form-generator__main">
       <el-card class="main-layout" @click.native.self="onResetActive" shadow="never">
+        <div slot="header" class="main-layout__header clearfix">
+          <div class="">表单配置</div>
+          <div class="main-layout__header--action">
+            <el-button type="warning" size="mini" @click="showSchemaCode = true">生成 Schema</el-button>
+            <el-button type="danger" size="mini">生成代码</el-button>
+            <el-button type="success" size="mini">预览表单</el-button>
+          </div>
+        </div>
         <el-form
           :model="formModel"
           :label-position="formSettings.labelPosition"
@@ -58,6 +66,7 @@
           ref="configPanel"/>
       </el-card>
     </section>
+    <schema-code :code="layoutSections" />
   </div>
 </template>
 
@@ -65,6 +74,7 @@
 import AsidePanel from './aside-panel'
 import ConfigPanel from './config-panel'
 import MainPanel from './main-panel'
+import SchemaCode from './dialog/SchemaCode'
 import { BASIC_COMPONENTS } from '@/constant/formGenerator'
 
 export default {
@@ -72,7 +82,8 @@ export default {
   components: {
     AsidePanel,
     ConfigPanel,
-    MainPanel
+    MainPanel,
+    SchemaCode
   },
   provide () {
     return {
@@ -103,7 +114,8 @@ export default {
       },
       orderRecord: 0, // 每次生成向上迭代
       activeSection: 0, // 激活的行数
-      activeProp: '' // 激活的组件prop
+      activeProp: '', // 激活的组件prop
+      showSchemaCode: false
     }
   },
   methods: {
@@ -161,14 +173,16 @@ export default {
     },
     onResetActive () {
       this.activeProp = ''
+    },
+    handleBuildSchema () {
+      console.log('dsds')
     }
   }
 }
 </script>
 
 <style lang="less">
-@yellow: #fa4;
-@pink: #f4a;
+@primary: #7367f0;
 @grey: #cfcbcb;
 
 .component-basic {
@@ -204,9 +218,30 @@ export default {
     cursor: pointer;
   }
 }
+
+.form-generator {
+  &__main {
+    .el-card__header {
+      background-color: @primary;
+      padding: 6px 12px;
+    }
+  }
+  &__config-panel {
+    .config-panel-layout {
+      .el-card__body {
+        padding: 0;
+        .el-tabs__content {
+          padding: 15px 20px;
+        }
+      }
+    }
+  }
+}
 </style>
 
 <style lang="less" scoped>
+@primary: #7367f0;
+
 .form-generator {
   display: flex;
   width: 100%;
@@ -219,6 +254,14 @@ export default {
     flex: 1;
     .main-layout {
       height: 100%;
+      border: 1px solid @primary;
+      &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 14px;
+        color: #ffffff;
+      }
       &__section {
         display: flex;
         justify-content: space-around;

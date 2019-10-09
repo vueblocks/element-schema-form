@@ -5,9 +5,9 @@
         class="el-menu--form-generator"
         mode="horizontal"
         router
-        background-color="#545c64"
-        text-color="#fff"
-        active-text-color="#fa4"
+        :background-color="headerBg"
+        :text-color="headerTextColor"
+        :active-text-color="headerActiveTextColor"
         :default-active="activeIndex"
         @select="handleSelect">
         <el-menu-item index="1" route="/test-common">基础组件</el-menu-item>
@@ -15,7 +15,7 @@
         <el-menu-item index="3" route="/form-generator">表单生成器</el-menu-item>
       </el-menu>
     </el-header>
-  <el-main  style="padding: 0;">
+  <el-main>
     <router-view></router-view>
   </el-main>
 </el-container>
@@ -26,7 +26,10 @@ export default {
   name: 'APP',
   data () {
     return {
-      activeIndex: '1'
+      activeIndex: '1',
+      headerBg: '#10163a',
+      headerTextColor: '#ffffff',
+      headerActiveTextColor: '#FF9F43'
     }
   },
   methods: {

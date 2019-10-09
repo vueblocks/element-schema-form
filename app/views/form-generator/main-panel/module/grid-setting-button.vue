@@ -81,10 +81,10 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.grid-setting-button{
+.grid-setting-button {
   width: 16px;
   height: 16px;
-  border: 2px solid #409eff;
+  border: 2px solid #7367f0;
   background-color: #fff;
   border-radius: 50%;
   transition: .2s;

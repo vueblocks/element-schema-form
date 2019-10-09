@@ -105,10 +105,9 @@ export default {
 </script>
 
 <style lang="less">
-@yellow: #fa4;
-@pink: #f4a;
+@primary: #7367f0;
 @grey: #cfcbcb;
-@blue: #409eff;
+
 .schema-form {
   &__row{
     &__grid{
@@ -122,7 +121,7 @@ export default {
       border:2px solid transparent;
       cursor: pointer;
       &--active{
-        border-color: @blue;
+        border-color: @primary;
       }
     }
     &--layout{
@@ -142,7 +141,7 @@ export default {
       position: relative;
       box-shadow: inset 0 0 0 2px transparent, 0 0 1px rgba(0, 0, 0, 0);
       &--active{
-        box-shadow: inset 0 0 0 2px @pink, 0 0 1px rgba(0, 0, 0, 0);
+        box-shadow: inset 0 0 0 2px @primary, 0 0 1px rgba(0, 0, 0, 0);
       }
       &__mask{
         position: absolute;

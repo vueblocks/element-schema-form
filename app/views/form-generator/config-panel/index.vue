@@ -1,6 +1,6 @@
 <template>
   <div class="config-panel">
-    <el-tabs v-model="activeTab" stretch>
+    <el-tabs v-model="activeTab" stretch type="border-card">
       <el-tab-pane label="表单设置" name="formSetting">
         <!-- 表单属性 -->
         <fieldset class="config-panel__fieldset">
@@ -118,6 +118,7 @@
 
 <script>
 import ComponentPanel from './module/component-panel'
+
 export default {
   name: 'ConfigPanel',
   inject: ['fg'],
@@ -156,6 +157,32 @@ export default {
 </script>
 
 <style lang="less">
+@primary: #7367f0;
+@lighten-primary-8: lighten(@primary, 8%);
+@darken-primary-8: darken(@primary, 8%);
+
+.el-tabs--border-card {
+  border: none;
+  box-shadow: none;
+}
+.el-tabs--border-card>.el-tabs__header .el-tabs__item {
+  color: #fff;
+  background-color: @lighten-primary-8;
+  border: none;
+  &:hover {
+    color: #fff;
+  }
+}
+.el-tabs--border-card>.el-tabs__header .el-tabs__item.is-active {
+  color: #fff;
+  background-color: @primary;
+}
+
+.el-tabs--border-card>.el-tabs__header .el-tabs__item:not(.is-disabled):hover {
+  color: #fff;
+  background-color: @darken-primary-8;
+}
+
 .config-panel {
   &__figcaption {
     box-sizing: content-box;
