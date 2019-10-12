@@ -7,6 +7,9 @@
     :visible.sync="fg.showVueCode"
     :before-close="handleClose">
     <codemirror v-model="vueCode" :options="cmOptions" />
+    <div solt="footer" class="form-generator__dialog--footer">
+      <el-button type="primary" icon="el-icon-copy" @click="handleCopyCode">复制代码</el-button>
+    </div>
   </el-dialog>
 </template>
 
@@ -71,6 +74,15 @@ export default {
     handleClose (done) {
       this.fg.showSchemaCode = false
       done()
+    },
+    handleCopyCode () {
+      const self = this
+      this.$copyText(this.vueCode).then(function (e) {
+        self.$message.success('已复制到剪切板')
+      }, function (e) {
+        alert('Can not copy')
+        console.log(e)
+      })
     }
   }
 }
@@ -79,5 +91,15 @@ export default {
 <style lang="less">
 .CodeMirror {
   min-height: 480px;
+}
+</style>
+
+<style lang="less" scoped>
+.form-generator__dialog {
+  &--footer {
+    display: flex;
+    justify-content: center;
+    margin-top: 16px;
+  }
 }
 </style>

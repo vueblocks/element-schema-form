@@ -2,6 +2,7 @@ import Vue from 'vue'
 
 import 'normalize.css'
 import './plugins/json-viewer'
+import './plugins/clipboard2'
 
 import App from './App.vue'
 import router from './router'

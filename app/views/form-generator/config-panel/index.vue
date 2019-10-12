@@ -29,7 +29,13 @@
                 <label for="">标签宽度</label>
               </el-col>
               <el-col :span="18" class="figure-control">
-                <el-input v-model.number="labelWidth" />
+                <el-input-number
+                  v-model.number="labelWidth"
+                  size="mini"
+                  :min="80"
+                  :max="320"
+                  :step="5"
+                />
               </el-col>
             </el-row>
           </figure>

@@ -8,10 +8,12 @@
     :before-close="handleClose">
     <json-viewer
       v-if="schemaCode"
-      :copyable="{copyText: '复制 Schema', copiedText: '已复制到剪切板'}"
       :value="schemaCode"
       :expand-depth="4"
     />
+    <div solt="footer" class="form-generator__dialog--footer">
+      <el-button type="primary" icon="el-icon-copy" @click="handleCopyCode">复制代码</el-button>
+    </div>
   </el-dialog>
 </template>
 
@@ -40,6 +42,15 @@ export default {
     handleClose (done) {
       this.fg.showSchemaCode = false
       done()
+    },
+    handleCopyCode () {
+      const self = this
+      this.$copyText(JSON.stringify(this.schemaCode)).then(function (e) {
+        self.$message.success('已复制到剪切板')
+      }, function (e) {
+        alert('Can not copy')
+        console.log(e)
+      })
     }
   }
 }
@@ -63,6 +74,16 @@ export default {
     font-size: 12px;
     max-height: 480px;
     overflow-y: auto;
+  }
+}
+</style>
+
+<style lang="less" scoped>
+.form-generator__dialog {
+  &--footer {
+    display: flex;
+    justify-content: center;
+    margin-top: 16px;
   }
 }
 </style>
