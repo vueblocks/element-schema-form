@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { codemirror } from 'vue-codemirror'
+import { codemirror } from 'vue-codemirror-lite'
 import 'codemirror/lib/codemirror.css'
 
 import FormMixin from '../mixins/form-mixin'
