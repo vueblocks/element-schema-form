@@ -14,7 +14,7 @@
           <div class="">表单配置</div>
           <div class="main-layout__header--action">
             <el-button type="warning" size="mini" @click="showSchemaCode = true">生成 Schema</el-button>
-            <el-button type="danger" size="mini">生成代码</el-button>
+            <el-button type="danger" size="mini" @click="showVueCode = true">生成 Vue 代码</el-button>
             <el-button type="success" size="mini">预览表单</el-button>
           </div>
         </div>
@@ -63,10 +63,20 @@
         <config-panel
           :activeProp="activeProp"
           @clearProp="onClearProp"
-          ref="configPanel"/>
+          ref="configPanel"
+        />
       </el-card>
     </section>
+    <!-- 生成 Schema Code 代码 Dialog -->
     <schema-code :code="layoutSections" />
+    <!-- 生成 Vue Code 代码 Dialog -->
+    <vue-code
+      :formSettings="formSettings"
+      :layout="formLayout"
+      :model="formModel"
+      :schema="layoutSections"
+      :options="formOptions"
+    />
   </div>
 </template>
 
@@ -75,6 +85,7 @@ import AsidePanel from './aside-panel'
 import ConfigPanel from './config-panel'
 import MainPanel from './main-panel'
 import SchemaCode from './dialog/SchemaCode'
+import VueCode from './dialog/VueCode'
 import { BASIC_COMPONENTS } from '@/constant/formGenerator'
 
 export default {
@@ -83,7 +94,8 @@ export default {
     AsidePanel,
     ConfigPanel,
     MainPanel,
-    SchemaCode
+    SchemaCode,
+    VueCode
   },
   provide () {
     return {
@@ -99,7 +111,7 @@ export default {
       formOptions: {},
       // 表单设置 - 栅格布局
       formLayout: {
-        gutter: 0,
+        gutter: 16,
         justify: 'start'
       },
       // 表单设置 - 表单属性
@@ -115,7 +127,8 @@ export default {
       orderRecord: 0, // 每次生成向上迭代
       activeSection: 0, // 激活的行数
       activeProp: '', // 激活的组件prop
-      showSchemaCode: false
+      showSchemaCode: false,
+      showVueCode: false
     }
   },
   methods: {
