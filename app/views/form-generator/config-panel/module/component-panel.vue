@@ -33,7 +33,6 @@
 import cloneDeep from 'lodash.clonedeep'
 
 export default {
-  inject: ['fg'],
   props: {
     editProp: {
       type: String
@@ -55,7 +54,7 @@ export default {
         return
       }
       this.lastProp = str
-      let _allSchema = this.fg.layoutSections.reduce((arr, list) => { return [...arr, ...list] }, [])
+      let _allSchema = this.$store.state.layoutSections.reduce((arr, list) => { return [...arr, ...list] }, [])
       let _cur = _allSchema.find(item => item.prop === str)
       this.editInfo = cloneDeep(_cur) || {}
     }
@@ -63,20 +62,11 @@ export default {
   methods: {
     onConfirm () {
       if (!this.validateEdit()) return
-      // 替换module
       if (this.editInfo.prop !== this.lastProp) {
-        let _val = this.fg.formModel[this.lastProp]
-        this.$delete(this.fg.formModel, this.lastProp)
-        this.$set(this.fg.formModel, this.editInfo.prop, _val)
-      }
-      // 替换options
-      if (this.editInfo.prop !== this.lastProp && this.fg.formOptions[this.lastProp]) {
-        let _option = this.fg.formOptions[this.lastProp]
-        this.$delete(this.fg.formOptions, this.lastProp)
-        this.$set(this.fg.formOptions, this.editInfo.prop, _option)
+        this.$store.dispatch('changeModelAndOption', { oldProp: this.lastProp, newProp: this.editInfo.prop })
       }
       // 替换schema
-      let _newVal = this.fg.layoutSections.map(list => {
+      let _newVal = this.$store.state.layoutSections.map(list => {
         return list.map(item => {
           if (item.prop === this.lastProp) {
             return cloneDeep(this.editInfo)
@@ -84,19 +74,18 @@ export default {
           return item
         })
       })
-      this.fg.layoutSections = _newVal
+      this.$store.commit('UPDATE_LAYOUT_SECTIONS', _newVal)
       this.$message.success('设置成功')
       this.reset()
     },
     validateEdit () {
-      if (this.editInfo.prop !== this.lastProp && this.fg.formModel.hasOwnProperty(this.editInfo.prop)) {
+      if (this.editInfo.prop !== this.lastProp && this.$store.state.formModel.hasOwnProperty(this.editInfo.prop)) {
         this.$message.error('数据字段已存在，请重新编辑数据字段')
         return false
       }
       return true
     },
     reset () {
-      this.$emit('success')
       this.lastProp = ''
       this.editInfo = {
         formItem: {},

@@ -30,7 +30,6 @@
         <row-setting
           v-if="rowIndex === activeSection && showLayout"
           :activeRow="activeSection"
-          @delRowSuccess="onDelRowSuccess"
         />
       </section>
       <template v-for="(col, colIndex) in row">
@@ -67,7 +66,6 @@ import RowSetting from './module/row-setting'
 
 export default {
   mixins: [LayoutMixin],
-  inject: ['fg'],
   components: {
     GridSetting,
     RowSetting
@@ -83,10 +81,10 @@ export default {
   },
   computed: {
     showGrid () { // 是否显示栅格
-      return this.fg.formControl.showGrid
+      return this.$store.state.formControl.showGrid
     },
     showLayout () { // 是否显示布局
-      return this.fg.formControl.showLayout
+      return this.$store.state.formControl.showLayout
     }
   },
   methods: {
@@ -96,9 +94,6 @@ export default {
     async changeActiveProp (rowIndex, { prop }) {
       await this.$emit('changActiveRow', rowIndex)
       this.$emit('changeActiveProp', prop || '')
-    },
-    onDelRowSuccess ({ activeRow }) {
-      this.$emit('changActiveRow', activeRow)
     }
   }
 }

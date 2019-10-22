@@ -1,12 +1,7 @@
 <template>
   <div class="form-generator">
     <aside class="form-generator__aside">
-      <aside-panel
-        :activeSection.sync="activeSection"
-        :activeProp="activeProp"
-        @deleteComp="onDeleteComp"
-        @editComp="onCompEdit"
-      />
+      <aside-panel />
     </aside>
     <main class="form-generator__main">
       <el-card class="main-layout" @click.native.self="onResetActive" shadow="never">
@@ -62,7 +57,6 @@
       <el-card class="config-panel-layout" shadow="never">
         <config-panel
           :activeProp="activeProp"
-          @clearProp="onClearProp"
           ref="configPanel"
         />
       </el-card>
@@ -88,6 +82,8 @@ import SchemaCode from './dialog/SchemaCode'
 import VueCode from './dialog/VueCode'
 import { BASIC_COMPONENTS } from '@/constant/formGenerator'
 
+import { mapState, mapActions } from 'vuex'
+
 export default {
   name: 'FormGenerator',
   components: {
@@ -104,91 +100,41 @@ export default {
   },
   data () {
     return {
-      // main
-      layoutSections: [],
       basicComponents: BASIC_COMPONENTS,
-      formModel: {},
-      formOptions: {},
-      // 表单设置 - 栅格布局
-      formLayout: {
-        gutter: 16,
-        justify: 'start'
-      },
-      // 表单设置 - 表单属性
-      formSettings: {
-        labelPosition: 'left',
-        size: 'small',
-        labelWidth: '80px'
-      },
-      formControl: {
-        showGrid: false,
-        showLayout: false
-      },
       orderRecord: 0, // 每次生成向上迭代
-      activeSection: 0, // 激活的行数
-      activeProp: '', // 激活的组件prop
       showSchemaCode: false,
       showVueCode: false
     }
   },
+  computed: {
+    ...mapState([
+      'layoutSections',
+      'formModel',
+      'formOptions',
+      'formLayout',
+      'formSettings',
+      'formControl',
+      'activeSection',
+      'activeProp'
+    ])
+  },
   methods: {
+    ...mapActions([
+      'addComponent'
+    ]),
     handleAddComponent (comp, scope) {
       const { rowIndex, colIndex } = scope
-      // 设定组件类型
-      let _propIdx = this.orderRecord += 1
-      let _component = {
-        type: comp.type,
-        prop: `default_${_propIdx}`,
-        formItem: { label: 'label:' }
-      }
-      const oldSection = this.layoutSections[rowIndex][colIndex]
-      const newSection = {
-        ..._component,
-        colGrid: oldSection.colGrid
-      }
-      this.layoutSections[rowIndex].splice(colIndex, 1, newSection)
-      // 设置module
-      this.$set(this.formModel, `default_${_propIdx}`, comp.value)
-      // 设置option
-      if (comp.needOption) {
-        this.$set(this.formOptions, `default_${_propIdx}`, [
-          { label: '选择A', value: 'A' },
-          { label: '选择B', value: 'B' }
-        ])
-      }
-      // 编辑弹窗
-      this.onCompEdit(`default_${_propIdx}`)
-    },
-    onDeleteComp (prop) {
-      if (prop) {
-        //  删除module
-        if (prop && this.formModel.hasOwnProperty(prop)) this.$delete(this.formModel, prop)
-        // 删除option
-        if (prop && this.formOptions.hasOwnProperty(prop)) this.$delete(this.formOptions, prop)
-      }
-      this.onCompEdit('')
-    },
-    onCompEdit (prop) {
-      this.$nextTick(() => {
-        this.activeProp = prop
-        // this.$refs.configPanel.editCompAttr(prop)
-      })
+      this.addComponent({ comp, rowIndex, colIndex })
     },
     changActiveRow (rowIndex) {
-      this.activeSection = rowIndex
-      this.onCompEdit('')
+      this.$store.commit('UPDATE_ACTIVE_PROP', '')
+      this.$store.commit('UPDATE_ACTIVE_SECTION', rowIndex)
     },
     changeActiveProp (prop) {
-      this.onCompEdit(prop)
-    },
-    onClearProp () {
-      this.activeProp = ''
+      this.$store.commit('UPDATE_ACTIVE_PROP', prop)
     },
     onResetActive () {
-      this.activeProp = ''
-    },
-    handleBuildSchema () {
-      console.log('dsds')
+      this.$store.commit('UPDATE_ACTIVE_PROP', '')
     }
   }
 }

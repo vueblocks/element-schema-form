@@ -14,7 +14,7 @@
                 <label for="">标签位置</label>
               </el-col>
               <el-col :span="18" class="figure-control">
-                <el-radio-group v-model="fg.formSettings.labelPosition" size="mini">
+                <el-radio-group v-model="labelPosition" size="mini">
                   <el-radio-button label="left">左</el-radio-button>
                   <el-radio-button label="right">右</el-radio-button>
                   <el-radio-button label="top">顶部</el-radio-button>
@@ -46,7 +46,7 @@
                 <label for="">组件尺寸</label>
               </el-col>
               <el-col :span="18" class="figure-control">
-                <el-radio-group v-model="fg.formSettings.size" size="mini">
+                <el-radio-group v-model="size" size="mini">
                   <el-radio-button label="mini">超小</el-radio-button>
                   <el-radio-button label="small">小型</el-radio-button>
                   <el-radio-button label="medium">中等</el-radio-button>
@@ -67,7 +67,7 @@
                 <label for="row-gutter">栅格间隔</label>
               </el-col>
               <el-col :span="17" class="figure-control">
-                <el-slider v-model="fg.formLayout.gutter" :max="72">
+                <el-slider v-model="gutter" :max="72">
                 </el-slider>
               </el-col>
               <el-col :span="1"></el-col>
@@ -80,7 +80,7 @@
                 <label for="row-gutter">对齐方式</label>
               </el-col>
               <el-col :span="19" class="figure-control">
-                <el-radio-group v-model="fg.formLayout.justify" size="mini">
+                <el-radio-group v-model="justify" size="mini">
                   <el-radio-button label="start">左</el-radio-button>
                   <el-radio-button label="end">右</el-radio-button>
                   <el-radio-button label="center">居中</el-radio-button>
@@ -96,7 +96,7 @@
                 <label for="row-gutter">显示栅格</label>
               </el-col>
               <el-col :span="17" class="figure-control">
-                <el-switch v-model="fg.formControl.showGrid" />
+                <el-switch v-model="showGrid" />
               </el-col>
               <el-col :span="1"></el-col>
             </el-row>
@@ -108,7 +108,7 @@
                 <label for="row-gutter">显示布局</label>
               </el-col>
               <el-col :span="17" class="figure-control">
-                <el-switch v-model="fg.formControl.showLayout" />
+                <el-switch v-model="showLayout" />
               </el-col>
               <el-col :span="1"></el-col>
             </el-row>
@@ -116,7 +116,7 @@
         </fieldset>
       </el-tab-pane>
       <el-tab-pane label="组件属性" name="componentSetting">
-        <component-panel :editProp="activeProp" @success="onClearProp"/>
+        <component-panel :editProp="activeProp"/>
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -124,10 +124,10 @@
 
 <script>
 import ComponentPanel from './module/component-panel'
+import { mapMutations } from 'vuex'
 
 export default {
   name: 'ConfigPanel',
-  inject: ['fg'],
   components: {
     ComponentPanel
   },
@@ -142,10 +142,58 @@ export default {
   computed: {
     labelWidth: {
       get () {
-        return parseFloat(this.fg.formSettings.labelWidth)
+        return parseFloat(this.$store.state.formSettings.labelWidth)
       },
       set (val) {
-        this.fg.formSettings.labelWidth = val + 'px'
+        this.updateFormSetting({ labelWidth: val + 'px' })
+      }
+    },
+    labelPosition: {
+      get () {
+        return this.$store.state.formSettings.labelPosition
+      },
+      set (val) {
+        this.updateFormSetting({ labelPosition: val })
+      }
+    },
+    size: {
+      get () {
+        return this.$store.state.formSettings.size
+      },
+      set (val) {
+        this.updateFormSetting({ size: val })
+      }
+    },
+    gutter: {
+      get () {
+        return this.$store.state.formLayout.gutter
+      },
+      set (val) {
+        this.updateFormLayout({ gutter: val })
+      }
+    },
+    justify: {
+      get () {
+        return this.$store.state.formLayout.justify
+      },
+      set (val) {
+        this.updateFormLayout({ justify: val })
+      }
+    },
+    showGrid: {
+      get () {
+        return this.$store.state.formControl.showGrid
+      },
+      set (val) {
+        this.updateFormControl({ showGrid: val })
+      }
+    },
+    showLayout: {
+      get () {
+        return this.$store.state.formControl.showLayout
+      },
+      set (val) {
+        this.updateFormControl({ showLayout: val })
       }
     }
   },
@@ -155,9 +203,11 @@ export default {
     }
   },
   methods: {
-    onClearProp () {
-      this.$emit('clearProp')
-    }
+    ...mapMutations({
+      updateFormSetting: 'UPDATE_FORM_SETTING',
+      updateFormLayout: 'UPDATE_FORM_LAYOUT',
+      updateFormControl: 'UPDATE_FORM_CONTROL'
+    })
   }
 }
 </script>
