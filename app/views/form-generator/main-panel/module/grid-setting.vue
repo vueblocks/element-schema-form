@@ -34,7 +34,6 @@
 import GridSettingButton from './grid-setting-button'
 
 export default {
-  inject: ['fg'],
   props: {
     activeRow: Number, // 激活行数
     schema: Array // 表单整体
@@ -50,8 +49,7 @@ export default {
   },
   computed: {
     activeLayout () {
-      if (!this.fg.layoutSections[this.activeRow]) return []
-      return this.fg.layoutSections[this.activeRow].map(item => item.colGrid.span)
+      return this.$store.getters.activeRow.map(item => item.colGrid.span)
     },
     stopPointNum () {
       return this.gridNum + 1

@@ -5,8 +5,8 @@
     </div>
     <section class="aside-layout__rowEdit">
       <row-select type="addRow" @editRow="onAddRow"/>
-      <row-select type="editRow" :activeLayOut="activeLayOut" @editRow="onEditRow"/>
-      <row-select type="deleteRow" @deleteRow="onDeleteRow"/>
+      <row-select type="editRow" :disabled="banEditOrDelete" :activeLayOut="activeLayOut" @editRow="onEditRow"/>
+      <row-select type="deleteRow" :disabled="banEditOrDelete" @deleteRow="onDeleteRow"/>
     </section>
     <div class="aside-layout__colitems-wrap">
       <draggable
@@ -24,7 +24,7 @@
             v-for="(element, idx) in colitemsGroup"
             :key="element.prop || idx"
             :class="{'aside-layout__colitem--active': element.prop === activeProp}"
-            @click="onEditComp(element.prop)"
+            @click.self="onEditComp(element.prop)"
           >
             <template v-if="element.prop">
               <span>{{ element.colGrid ? element.colGrid.span : '' }}</span>
@@ -50,6 +50,8 @@
 import Draggable from 'vuedraggable'
 import RowSelect from './module/row-select'
 
+import { mapActions } from 'vuex'
+
 export default {
   name: 'AsidePanel',
   components: {
@@ -57,10 +59,8 @@ export default {
     RowSelect
   },
   props: {
-    activeSection: Number, // 激活行index
-    activeProp: String // 激活的prop
+    activeSection: Number // 激活行index
   },
-  inject: ['fg'],
   data () {
     return {
       // aside
@@ -77,26 +77,30 @@ export default {
   computed: {
     colitemsGroup: {
       get  () {
-        return this.fg.layoutSections[this.activeSection] || []
+        return this.$store.getters.activeRow
       },
       set (val) {
-        this.fg.layoutSections.splice(this.activeSection, 1, val)
+        this.changeRow(val)
       }
     },
     activeLayOut () {
       return this.colitemsGroup.map(item => item.colGrid.span)
+    },
+    banEditOrDelete () {
+      return !this.$store.getters.activeRow.length
+    },
+    activeProp () {
+      return this.$store.state.activeProp
     }
   },
   methods: {
-    handleChangeLayout (data) {
-      const initVal = data.map((val, idx) => {
-        return {
-          colGrid: { span: val },
-          isCustom: 'btn-addCol'
-        }
-      })
-      this.fg.layoutSections.push(initVal)
-    },
+    ...mapActions([
+      'addRow',
+      'editRow',
+      'deleteRow',
+      'changeRow',
+      'delteColComp'
+    ]),
     checkMove (e) {
       console.log('Future index: ' + e.draggedContext.futureIndex)
     },
@@ -105,8 +109,7 @@ export default {
         isCustom: 'btn-addCol',
         colGrid: element.colGrid
       }
-      this.fg.layoutSections[this.activeSection].splice(colIndex, 1, oldSection)
-      this.$emit('deleteComp', element.prop)
+      this.delteColComp({ colIndex, newVal: oldSection, prop: element.prop })
     },
     onAddRow (data) {
       const initVal = data.map((val, idx) => {
@@ -115,46 +118,16 @@ export default {
           isCustom: 'btn-addCol'
         }
       })
-      this.fg.layoutSections.push(initVal)
-      let _activeSection = this.fg.layoutSections.length - 1
-      this.$emit('update:activeSection', _activeSection)
-      this.$emit('deleteComp', '')
+      this.addRow(initVal)
     },
     onEditRow (data) {
-      let _result = data.map((grid, idx) => {
-        let _cur = this.colitemsGroup[idx]
-        if (_cur) {
-          return { ..._cur, colGrid: { span: grid } }
-        }
-        return { colGrid: { span: grid }, isCustom: 'btn-addCol' }
-      })
-      // 删除冗余的prop
-      if (data.length < this.colitemsGroup.length) {
-        let _delPart = this.colitemsGroup.slice(data.length)
-        _delPart.forEach(grid => {
-          this.delModuleAndOption(grid)
-        })
-      }
-      this.fg.layoutSections.splice(this.activeSection, 1, _result)
-      this.$emit('deleteComp', '')
-    },
-    delModuleAndOption (grid) {
-      //  删除module
-      if (this.fg.formModel.hasOwnProperty(grid.prop)) this.$delete(this.fg.formModel, grid.prop)
-      // 删除option
-      if (this.fg.formOptions.hasOwnProperty(grid.prop)) this.$delete(this.fg.formOptions, grid.prop)
+      this.editRow(data)
     },
     onDeleteRow () {
-      this.colitemsGroup.forEach(grid => {
-        this.delModuleAndOption(grid)
-      })
-      let _activeSection = this.activeSection === 0 ? 0 : this.activeSection - 1
-      this.fg.layoutSections.splice(this.activeSection, 1)
-      this.$emit('update:activeSection', _activeSection)
-      this.$emit('deleteComp', '')
+      this.deleteRow()
     },
     onEditComp (prop) {
-      this.$emit('editComp', prop || '')
+      if (prop) this.$store.commit('UPDATE_ACTIVE_PROP', prop)
     }
   }
 }
@@ -209,7 +182,8 @@ export default {
     justify-content:space-between;
     line-height: 1.5em;
     &--active{
-      box-shadow: 0 0 10px @grey;
+      border-right: 2px solid @primary;
+      border-radius: 3px 0 0 3px;
     }
     .colitem-icon {
       display: inline-block;

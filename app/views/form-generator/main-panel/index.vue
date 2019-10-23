@@ -1,23 +1,23 @@
 <template>
-  <div class="schema-form">
+  <div class="schema-main">
     <!-- 表单 -->
     <el-row
       v-bind="layout"
       type="flex"
-      class="schema-form__row"
+      class="schema-main__row"
       v-for="(row, rowIndex) in formatedSchema"
       :class="{
-        'schema-form__row--active': rowIndex === activeSection,
-        'schema-form__row--grid': showGrid,
-        'schema-form__row--layout': showLayout
+        'schema-main__row--active': rowIndex === activeSection,
+        'schema-main__row--grid': showGrid,
+        'schema-main__row--layout': showLayout
       }"
       :key="rowIndex"
     >
       <!-- 行蒙层 -->
       <section
         v-if="(showGrid && rowIndex === activeSection) || showLayout"
-        class="schema-form__row__grid"
-        :class="{'schema-form__row__grid--active': rowIndex === activeSection}"
+        class="schema-main__row__grid"
+        :class="{'schema-main__row__grid--active': rowIndex === activeSection}"
         @click.self.stop="changActiveRow(rowIndex)"
       >
         <!-- 设置栅格 -->
@@ -30,7 +30,6 @@
         <row-setting
           v-if="rowIndex === activeSection && showLayout"
           :activeRow="activeSection"
-          @delRowSuccess="onDelRowSuccess"
         />
       </section>
       <template v-for="(col, colIndex) in row">
@@ -67,7 +66,6 @@ import RowSetting from './module/row-setting'
 
 export default {
   mixins: [LayoutMixin],
-  inject: ['fg'],
   components: {
     GridSetting,
     RowSetting
@@ -83,10 +81,10 @@ export default {
   },
   computed: {
     showGrid () { // 是否显示栅格
-      return this.fg.formControl.showGrid
+      return this.$store.state.formControl.showGrid
     },
     showLayout () { // 是否显示布局
-      return this.fg.formControl.showLayout
+      return this.$store.state.formControl.showLayout
     }
   },
   methods: {
@@ -96,9 +94,6 @@ export default {
     async changeActiveProp (rowIndex, { prop }) {
       await this.$emit('changActiveRow', rowIndex)
       this.$emit('changeActiveProp', prop || '')
-    },
-    onDelRowSuccess ({ activeRow }) {
-      this.$emit('changActiveRow', activeRow)
     }
   }
 }
@@ -108,7 +103,7 @@ export default {
 @primary: #7367f0;
 @grey: #cfcbcb;
 
-.schema-form {
+.schema-main {
   &__row{
     &__grid{
       position: absolute;
@@ -130,7 +125,7 @@ export default {
         &:not(:last-child) {
           border-right: 1px dotted #000;
         }
-        .schema-form-item--custom{
+        .schema-main-item--custom{
           opacity: 0;
         }
       }
@@ -162,7 +157,7 @@ export default {
       }
     }
   }
-  &__row--active.schema-form__row--grid{
+  &__row--active.schema-main__row--grid{
     .el-col {
       &--active{
         box-shadow: inset 0 0 0 2px transparent, 0 0 1px rgba(0, 0, 0, 0);

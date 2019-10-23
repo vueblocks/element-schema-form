@@ -9,7 +9,6 @@
 
 <script>
 export default {
-  inject: ['fg'],
   props: {
     sliderWidth: Number, // 滑条的宽度
     gridNum: Number, // 栅格的分数
@@ -62,7 +61,7 @@ export default {
         _cloneLayout[this.index] = _num
         _cloneLayout[this.index + 1] = _cloneLayout[this.index + 1] + _diff
         // 计算新的结果
-        let _result = this.fg.layoutSections.map((list, rowIdx) => {
+        let _result = this.$store.state.layoutSections.map((list, rowIdx) => {
           if (rowIdx === this.activeRow) {
             return list.map((item, colIdx) => {
               return {
@@ -73,7 +72,7 @@ export default {
           }
           return list
         })
-        this.fg.layoutSections = _result
+        this.$store.commit('UPDATE_LAYOUT_SECTIONS', _result)
       }
     }
   }
