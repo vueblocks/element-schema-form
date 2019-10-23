@@ -2,46 +2,54 @@ const BASIC_COMPONENTS = [
   {
     type: 'input',
     name: '输入框',
-    value: ''
+    value: '',
+    attrs: ['type', 'rows', 'placeholder', 'prefix-icon', 'suffix-icon', 'clearable', 'disabled', 'show-password', 'show-word-limit', 'maxlength']
   },
   {
     type: 'select',
     name: '选择器',
     needOption: true,
-    value: ''
+    value: '',
+    attrs: ['placeholder', 'clearable', 'disabled', 'multiple', 'multiple-limit', 'collapse-tags']
   },
   {
     type: 'radio',
     name: '单选框',
     needOption: true,
-    value: ''
+    value: '',
+    attrs: ['disabled']
   },
   {
     type: 'checkbox',
     name: '多选框',
     needOption: true,
-    value: []
+    value: [],
+    attrs: ['disabled', 'min', 'max']
   },
   {
     type: 'cascader',
     name: '级联选择器',
     needOption: true,
-    value: []
+    value: [],
+    attrs: ['placeholder', 'disabled', 'clearable', 'show-all-levels']
   },
   {
     type: 'switch',
     name: '开关',
-    value: false
+    value: false,
+    attrs: ['disabled', 'width', 'active-text', 'inactive-text']
   },
   {
     type: 'slider',
     name: '滑块',
-    value: 0
+    value: 0,
+    attrs: ['disabled', 'step', 'show-tooltip', 'show-input', 'show-stops', 'range', 'min', 'max']
   },
   {
     type: 'datepicker',
     name: '日期选择器',
-    value: ''
+    value: '',
+    attrs: ['disabled', 'clearable', 'placeholder']
   },
   {
     type: 'timeselect',

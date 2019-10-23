@@ -20,6 +20,27 @@
       <figcaption class="component-panel__figcaption">
         <span>私有属性</span>
       </figcaption>
+      <!-- 私有属性配置 -->
+      <div v-for="(info, key) in config" :key="key">
+        <label-layout
+          show-checkbox
+          :title="info.label"
+          :isBind.sync="info.enabled"
+          v-if="calcVisible(info)"
+        >
+          <el-select v-if="info.type === 'select'" v-model="info.value" clearable>
+            <el-option
+              v-for="item in info.options"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value">
+            </el-option>
+          </el-select>
+          <el-input v-if="info.type === 'string'" v-model="info.value"></el-input>
+          <el-input v-if="info.type === 'number'" v-model.number="info.value"></el-input>
+          <el-switch v-if="info.type === 'boolean'" v-model="info.value"></el-switch>
+        </label-layout>
+      </div>
     </fieldset>
     <el-button type="primary" @click="onConfirm" :disabled="!editInfo.prop">确定</el-button>
   </section>
@@ -29,6 +50,8 @@
 
 import cloneDeep from 'lodash.clonedeep'
 import LabelLayout from './label-layout'
+
+import { formatConfig } from '@/utils/configFormatter.js'
 
 export default {
   components: {
@@ -45,7 +68,8 @@ export default {
       editInfo: {
         formItem: {},
         colGrid: {}
-      }
+      },
+      config: {}
     }
   },
   watch: {
@@ -57,7 +81,9 @@ export default {
       this.lastProp = str
       let _allSchema = this.$store.state.layoutSections.reduce((arr, list) => { return [...arr, ...list] }, [])
       let _cur = _allSchema.find(item => item.prop === str)
+      if (!_cur) return
       this.editInfo = cloneDeep(_cur) || {}
+      this.config = cloneDeep(formatConfig(_cur.type, _cur.attrs || {}))
     }
   },
   methods: {
@@ -65,6 +91,20 @@ export default {
       if (!this.validateEdit()) return
       if (this.editInfo.prop !== this.lastProp) {
         this.$store.dispatch('changeModelAndOption', { oldProp: this.lastProp, newProp: this.editInfo.prop })
+      }
+      // 添加attrs
+      let _attrs = {}
+      for (let key in this.config) {
+        let _cur = this.config[key]
+        if (_cur.enabled) {
+          if (_cur.associate) if (!this.config[_cur.associate].value || !this.config[_cur.associate].enabled) break // 排除有关联的属性
+          if (_cur.type === 'select') if (!_cur.value) break // 排除多选项未选择
+          _attrs[key] = _cur.value
+        }
+      }
+      if (Object.keys(_attrs).length || this.editInfo.hasOwnProperty('attrs')) {
+        if (!Object.keys(_attrs).length) this.$delete(this.editInfo, 'attrs')
+        else this.editInfo = { ...this.editInfo, attrs: _attrs }
       }
       // 替换schema
       let _newVal = this.$store.state.layoutSections.map(list => {
@@ -92,6 +132,11 @@ export default {
         formItem: {},
         colGrid: {}
       }
+      this.config = {}
+    },
+    calcVisible (info) {
+      if (info.associate) return !!this.config[info.associate].value
+      return true
     }
   }
 }
