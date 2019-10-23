@@ -10,7 +10,7 @@
           <div class="main-layout__header--action">
             <el-button type="warning" size="mini" @click="showSchemaCode = true">生成 Schema</el-button>
             <el-button type="danger" size="mini" @click="showVueCode = true">生成 Vue 代码</el-button>
-            <el-button type="success" size="mini">预览表单</el-button>
+            <el-button type="success" size="mini"  @click="showResult = true">预览表单</el-button>
           </div>
         </div>
         <el-form
@@ -71,6 +71,14 @@
       :schema="layoutSections"
       :options="formOptions"
     />
+    <!-- 预览表单 -->
+    <PreviewForm
+      :formSettings="formSettings"
+      :layout="formLayout"
+      :model="formModel"
+      :schema="layoutSections"
+      :options="formOptions"
+    />
   </div>
 </template>
 
@@ -80,6 +88,8 @@ import ConfigPanel from './config-panel'
 import MainPanel from './main-panel'
 import SchemaCode from './dialog/SchemaCode'
 import VueCode from './dialog/VueCode'
+import PreviewForm from './dialog/PreviewForm'
+
 import { BASIC_COMPONENTS } from '@/constant/formGenerator'
 
 import { mapState, mapActions } from 'vuex'
@@ -91,7 +101,8 @@ export default {
     ConfigPanel,
     MainPanel,
     SchemaCode,
-    VueCode
+    VueCode,
+    PreviewForm
   },
   provide () {
     return {
@@ -103,7 +114,8 @@ export default {
       basicComponents: BASIC_COMPONENTS,
       orderRecord: 0, // 每次生成向上迭代
       showSchemaCode: false,
-      showVueCode: false
+      showVueCode: false,
+      showResult: false
     }
   },
   computed: {
@@ -135,6 +147,7 @@ export default {
     },
     onResetActive () {
       this.$store.commit('UPDATE_ACTIVE_PROP', '')
+      this.$store.commit('UPDATE_ACTIVE_SECTION', -1)
     }
   }
 }

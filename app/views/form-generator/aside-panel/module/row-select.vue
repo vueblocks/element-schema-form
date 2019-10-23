@@ -1,16 +1,30 @@
 <template>
   <section>
     <div class="row-select" v-if="type === 'deleteRow'">
-      <el-button type="primary" size="mini" icon="el-icon-delete" circle @click="$emit('deleteRow')"></el-button>
+      <el-button
+        type="primary"
+        circle
+        size="mini"
+        icon="el-icon-delete"
+        :disabled="disabled"
+        @click="$emit('deleteRow')">
+      </el-button>
       <div class="row-select__des">{{des}}</div>
     </div>
     <el-dropdown trigger="click" @command="handleCommand" v-else>
       <div class="row-select">
-        <el-button type="primary" size="mini" :icon="type === 'addRow' ? 'el-icon-plus': 'el-icon-edit'" circle></el-button>
+        <el-button
+          type="primary"
+          circle
+          size="mini"
+          :icon="type === 'addRow' ? 'el-icon-plus': 'el-icon-edit'"
+          :disabled="disabled"
+        >
+        </el-button>
         <div class="row-select__des">{{des}}</div>
       </div>
       <el-dropdown-menu slot="dropdown">
-        <div style="overflow-y:auto;">
+        <div style="overflow-y:auto;max-height:300px">
           <el-dropdown-item
             v-for="(layout, index) in activeRowLayouts"
             :key="index"
@@ -48,6 +62,10 @@ export default {
     },
     activeLayOut: { // 当前活跃的状态
       type: Array
+    },
+    disabled: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
@@ -82,6 +100,7 @@ export default {
       return _des[this.type]
     },
     activeRowLayouts () {
+      if (this.disabled) return []
       if (!this.activeLayOut) return this.rowLayouts
       return this.rowLayouts.filter(item => !isEqual(item, this.activeLayOut))
     }

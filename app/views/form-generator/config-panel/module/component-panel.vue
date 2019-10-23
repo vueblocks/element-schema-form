@@ -5,24 +5,21 @@
       <figcaption class="component-panel__figcaption">
         <span>通用属性</span>
       </figcaption>
-      <figure class="component-panel__figure">
-        <label class="figure-label">标签名称:</label>
-        <div class="figure-control">
+        <label-layout title="标签名称:">
           <el-input v-model="editInfo.formItem.label"></el-input>
-        </div>
-      </figure>
-      <figure class="component-panel__figure">
-        <label class="figure-label">数据字段:</label>
-        <div class="figure-control">
+        </label-layout>
+        <label-layout title="数据字段:">
           <el-input v-model="editInfo.prop"></el-input>
-        </div>
-      </figure>
-      <figure class="component-panel__figure">
-        <label class="figure-label">栅格数:</label>
-        <div class="figure-control">
+        </label-layout>
+        <label-layout title="栅格数:">
           <el-input v-model.number="editInfo.colGrid.span"></el-input>
-        </div>
-      </figure>
+        </label-layout>
+    </fieldset>
+    <!-- 定制属性 -->
+    <fieldset class="component-panel__fieldset">
+      <figcaption class="component-panel__figcaption">
+        <span>私有属性</span>
+      </figcaption>
     </fieldset>
     <el-button type="primary" @click="onConfirm" :disabled="!editInfo.prop">确定</el-button>
   </section>
@@ -31,8 +28,12 @@
 <script>
 
 import cloneDeep from 'lodash.clonedeep'
+import LabelLayout from './label-layout'
 
 export default {
+  components: {
+    LabelLayout
+  },
   props: {
     editProp: {
       type: String
@@ -104,18 +105,7 @@ export default {
     margin-bottom: 15px;
     padding: 8px 0;
     border-bottom: 1px solid #EBEEF5;
-  }
-  &__figure {
-    margin-bottom: 16px;
-    display: flex;
-    align-items: center;
-    .figure-label {
-      font-size: 12px;
-      width:65px;
-    }
-    .figure-control {
-      flex:1;
-    }
+    font-weight: 600;
   }
 }
 </style>

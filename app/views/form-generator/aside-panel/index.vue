@@ -5,8 +5,8 @@
     </div>
     <section class="aside-layout__rowEdit">
       <row-select type="addRow" @editRow="onAddRow"/>
-      <row-select type="editRow" :activeLayOut="activeLayOut" @editRow="onEditRow"/>
-      <row-select type="deleteRow" @deleteRow="onDeleteRow"/>
+      <row-select type="editRow" :disabled="banEditOrDelete" :activeLayOut="activeLayOut" @editRow="onEditRow"/>
+      <row-select type="deleteRow" :disabled="banEditOrDelete" @deleteRow="onDeleteRow"/>
     </section>
     <div class="aside-layout__colitems-wrap">
       <draggable
@@ -59,8 +59,7 @@ export default {
     RowSelect
   },
   props: {
-    activeSection: Number, // 激活行index
-    activeProp: String // 激活的prop
+    activeSection: Number // 激活行index
   },
   data () {
     return {
@@ -86,6 +85,12 @@ export default {
     },
     activeLayOut () {
       return this.colitemsGroup.map(item => item.colGrid.span)
+    },
+    banEditOrDelete () {
+      return !this.$store.getters.activeRow.length
+    },
+    activeProp () {
+      return this.$store.state.activeProp
     }
   },
   methods: {
@@ -177,7 +182,8 @@ export default {
     justify-content:space-between;
     line-height: 1.5em;
     &--active{
-      box-shadow: 0 0 10px @grey;
+      border-right: 2px solid @primary;
+      border-radius: 3px 0 0 3px;
     }
     .colitem-icon {
       display: inline-block;
