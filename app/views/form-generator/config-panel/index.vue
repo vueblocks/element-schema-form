@@ -136,7 +136,7 @@ export default {
   },
   data () {
     return {
-      activeTab: 'formSetting'
+      activeTab: 'componentSetting'
     }
   },
   computed: {
