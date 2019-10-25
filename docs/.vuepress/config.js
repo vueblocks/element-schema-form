@@ -7,7 +7,7 @@ module.exports = {
     sidebarDepth: 2,
     nav: [
       { text: '指南', link: '/guide/' },
-      { text: '组件', link: '/component/' },
+      { text: '组件', link: '/guide/component/SchemaForm' },
       { text: '表单设计器', link: '/form-generator/' },
       {
         text: 've-charts',
@@ -22,20 +22,20 @@ module.exports = {
       '/guide/': [
         {
           title: '指南',
+          collapsable: false,
           children: [
             '/guide/',
-            '/guide/快速开始',
-            '/guide/更新日志',
-            '/guide/在线示例',
+            '快速开始',
+            '更新日志',
+            '在线示例',
           ]
-        }
-      ],
-      '/component/': [
+        },
         {
           title: '组件',
+          collapsable: false,
           children: [
-            '/component/SchemaForm',
-            '/component/SchemaFormItem'
+            '/guide/component/SchemaForm',
+            '/guide/component/SchemaFormItem'
           ]
         }
       ]

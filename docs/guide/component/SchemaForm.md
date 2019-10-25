@@ -28,13 +28,13 @@ export default {
   data () {
     return {
       // 表单布局
-      layout: {'gutter':16,'justify':'start'},
+      layout: {},
       // 表单绑定模型
-      module: {'default_1':'','default_2':''},
+      module: {},
       // 表单 schema
-      schema: [[{'type':'select','prop':'default_2','formItem':{'label':'label:'},'colGrid':{'span':12}},{'type':'input','prop':'default_1','formItem':{'label':'label:'},'colGrid':{'span':12}}]],
+      schema: [],
       // 表单 options
-      options: {'default_2':[{'label':'选择A','value':'A'},{'label':'选择B','value':'B'}]}
+      options: {}
     }
   }
 }
