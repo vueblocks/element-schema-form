@@ -27,6 +27,7 @@
       v-if="showAdd && !inputVisible"
       class="button-new-tag"
       :size="buttonSize"
+      :type="buttonType"
       @click="showInput"
     >{{buttonWords}}</el-button>
   </div>

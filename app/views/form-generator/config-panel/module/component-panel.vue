@@ -23,9 +23,7 @@
       <!-- 私有属性配置 -->
       <div v-for="(info, key) in config" :key="key">
         <label-layout
-          show-checkbox
           :title="info.label"
-          :isBind.sync="info.enabled"
           v-if="calcVisible(info)"
         >
           <el-select v-if="info.type === 'select'" v-model="info.value" clearable>
@@ -36,8 +34,8 @@
               :value="item.value">
             </el-option>
           </el-select>
-          <el-input v-if="info.type === 'string'" v-model="info.value"></el-input>
-          <el-input v-if="info.type === 'number'" v-model.number="info.value"></el-input>
+          <el-input v-if="info.type === 'string'" v-model="info.value" clearable></el-input>
+          <el-input-number v-if="info.type === 'number'" v-model="info.value"></el-input-number>
           <el-switch v-if="info.type === 'boolean'" v-model="info.value"></el-switch>
         </label-layout>
       </div>
@@ -96,9 +94,12 @@ export default {
       let _attrs = {}
       for (let key in this.config) {
         let _cur = this.config[key]
-        if (_cur.enabled) {
-          if (_cur.associate) if (!this.config[_cur.associate].value || !this.config[_cur.associate].enabled) break // 排除有关联的属性
-          if (_cur.type === 'select') if (!_cur.value) break // 排除多选项未选择
+        if (_cur.default !== _cur.value) {
+          if (_cur.associate) { // 排除有关联的属性
+            if (Array.isArray(_cur.associateVal)) {
+              if (!_cur.associateVal.includes(this.config[_cur.associate].value)) continue
+            } else { if (this.config[_cur.associate].value !== _cur.associateVal) continue }
+          }
           _attrs[key] = _cur.value
         }
       }
@@ -117,7 +118,7 @@ export default {
       })
       this.$store.commit('UPDATE_LAYOUT_SECTIONS', _newVal)
       this.$message.success('设置成功')
-      this.reset()
+      // this.reset()
     },
     validateEdit () {
       if (this.editInfo.prop !== this.lastProp && this.$store.state.formModel.hasOwnProperty(this.editInfo.prop)) {
@@ -135,7 +136,10 @@ export default {
       this.config = {}
     },
     calcVisible (info) {
-      if (info.associate) return !!this.config[info.associate].value
+      if (info.associate) {
+        if (Array.isArray(info.associateVal)) return info.associateVal.includes(this.config[info.associate].value)
+        else return info.associateVal === this.config[info.associate].value
+      }
       return true
     }
   }

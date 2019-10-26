@@ -3,7 +3,7 @@ const BASIC_COMPONENTS = [
     type: 'input',
     name: '输入框',
     value: '',
-    attrs: ['type', 'rows', 'placeholder', 'prefix-icon', 'suffix-icon', 'clearable', 'disabled', 'show-password', 'show-word-limit', 'maxlength']
+    attrs: ['*input-type', 'rows', 'placeholder', 'prefix-icon', 'suffix-icon', 'clearable', 'disabled', 'show-password', 'show-word-limit', 'maxlength']
   },
   {
     type: 'select',
@@ -24,7 +24,7 @@ const BASIC_COMPONENTS = [
     name: '多选框',
     needOption: true,
     value: [],
-    attrs: ['disabled', 'min', 'max']
+    attrs: ['disabled', '*checkbox-min', '*checkbox-max']
   },
   {
     type: 'cascader',
@@ -43,38 +43,45 @@ const BASIC_COMPONENTS = [
     type: 'slider',
     name: '滑块',
     value: 0,
-    attrs: ['disabled', 'step', 'show-tooltip', 'show-input', 'show-stops', 'range', 'min', 'max']
+    attrs: ['disabled', 'step', '*slider-min', '*slider-max', 'show-tooltip', 'show-input', 'show-stops', 'range']
   },
   {
     type: 'datepicker',
     name: '日期选择器',
     value: '',
-    attrs: ['disabled', 'clearable', 'placeholder']
+    attrs: ['disabled', 'clearable', 'placeholder', '*datepicker-type',
+      'format', 'value-format', '*datepicker-range-separator', '*datepicker-start-placeholder', '*datepicker-end-placeholder']
   },
   {
     type: 'timeselect',
     name: '时间选择器',
-    value: ''
+    value: '',
+    attrs: ['disabled', 'clearable', 'placeholder', 'value-format', 'is-range',
+      '*timepicker-range-separator', '*timepicker-start-placeholder', '*timepicker-end-placeholder']
   },
   {
     type: 'colorpicker',
     name: '颜色选择器',
-    value: ''
+    value: '',
+    attrs: ['disabled', 'show-alpha', 'color-format']
   },
   {
     type: 'progress',
     name: '进度条',
-    value: 0
+    value: 0,
+    attrs: ['*progress-type', 'status', 'stroke-width', '*progress-show-text']
   },
   {
     type: 'rate',
     name: '评分',
-    value: 0
+    value: 0,
+    attrs: ['*star-max', 'disabled', 'allow-half', '*rate-show-text']
   },
   {
     type: 'tags',
     name: '标签',
-    value: ['默认']
+    value: ['默认'],
+    attrs: ['*tags-type', 'show-add', 'button-type', 'button-size', 'button-words', 'closable', 'hit']
   }
 ]
 

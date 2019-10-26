@@ -91,7 +91,7 @@ export const schema = [
       type: 'tags',
       prop: 'label',
       formItem: { label: '标签' },
-      attrs: { size: 'medium', buttonSize: 'mini' }
+      attrs: { size: 'medium', buttonSize: 'mini', 'show-add': true }
     }, {
       type: 'progress',
       prop: 'percent',
