@@ -1,10 +1,10 @@
 export default {
   computed: {
     showAdd () { // 是否展示新增按钮
-      return this.attrsAll.showAdd ? this.attrsAll.showAdd : true
+      return this.attrsAll['show-add'] ? this.attrsAll['show-add'] : false
     },
     closable () { // 标签是否可删除
-      return this.attrsAll.closable && !this.showAdd ? this.attrsAll.closable : true
+      return this.attrsAll.hasOwnProperty('closable') ? this.attrsAll.closable : true
     },
     type () { // 标签类型
       return this.attrsAll.type ? this.attrsAll.type : ''
@@ -22,10 +22,13 @@ export default {
       return this.attrsAll.color ? this.attrsAll.color : ''
     },
     buttonSize () { // 按钮尺寸
-      return this.attrsAll.buttonSize ? this.attrsAll.buttonSize : 'small'
+      return this.attrsAll['button-size'] ? this.attrsAll['button-size'] : 'small'
     },
     buttonWords () { // 按钮文案
-      return this.attrsAll.buttonWords ? this.attrsAll.buttonWords : '+ New Tag'
+      return this.attrsAll['button-words'] ? this.attrsAll['button-words'] : '+ New Tag'
+    },
+    buttonType () { // 按钮类型
+      return this.attrsAll['button-type'] ? this.attrsAll['button-type'] : ''
     }
   }
 }

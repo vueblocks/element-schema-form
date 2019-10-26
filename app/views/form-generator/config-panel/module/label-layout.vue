@@ -1,6 +1,5 @@
 <template>
   <div class="label-layout">
-    <el-checkbox v-model="isShow" v-if="showCheckbox"></el-checkbox>
     <label class="figure-label">{{title}}</label>
     <div class="figure-control">
       <slot></slot>
@@ -11,33 +10,10 @@
 <script>
 export default {
   props: {
-    title: String,
-    showCheckbox: {
-      type: Boolean,
-      default: false
-    },
-    isBind: Boolean
-  },
-  computed: {
-    isShow: {
-      get () {
-        return this.isBind
-      },
-      set (val) {
-        this.$emit('update:isBind', val)
-      }
-    }
+    title: String
   }
 }
 </script>
-
-<style lang="less">
-.label-layout{
-  .el-checkbox{
-    margin-right:5px;
-  }
-}
-</style>
 
 <style lang="less" scoped>
 .label-layout{
@@ -46,7 +22,7 @@ export default {
   align-items: center;
   .figure-label {
     font-size: 12px;
-    min-width:60px;
+    min-width:70px;
     margin-right:5px;
   }
   .figure-control {
