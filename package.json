@@ -1,5 +1,5 @@
 {
-  "name": "element-schema-form",
+  "name": "@vueblocks/element-schema-form",
   "version": "0.1.0",
   "description": "A schema-based form generator component for Element UI.",
   "author": "xiaoluoboding <xiaoluoboding@gmail.com>",
@@ -15,6 +15,11 @@
   },
   "main": "lib/element-schema-form.umd.min.js",
   "unpkg": "lib/element-schema-form.umd.min.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vueblocks/element-form-generator.git"
+  },
+  "license": "MIT",
   "dependencies": {
     "core-js": "^3.3.2",
     "element-ui": "^2.11.1",
