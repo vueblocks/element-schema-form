@@ -33,8 +33,11 @@ module.exports = {
         {
           title: '组件',
           collapsable: false,
+          sidebarDepth: 1,
           children: [
             '/guide/component/SchemaForm',
+            ['/guide/component/schema', 'schema 详解'],
+            ['/guide/component/layout', 'layout 布局'],
             '/guide/component/SchemaFormItem'
           ]
         }
