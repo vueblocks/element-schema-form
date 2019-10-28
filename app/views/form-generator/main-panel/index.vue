@@ -49,7 +49,7 @@
             v-bind="col.formItem"
             :prop="col.prop"
             :col="col"
-            :module="module"
+            :model="model"
             :options="options"
             v-on="$listeners"
           />

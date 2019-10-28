@@ -2,7 +2,7 @@ export function getVueCode (payload) {
   const {
     formSettings = {},
     layout = {},
-    module = {},
+    model = {},
     schema = [],
     options = {}
   } = payload
@@ -19,10 +19,10 @@ export function getVueCode (payload) {
   }
 
   let codeTemplate = `<template>
-  <el-form size="${size}" label-position="${labelPosition}" label-width="${labelWidth}" :model="module">
+  <el-form size="${size}" label-position="${labelPosition}" label-width="${labelWidth}" :model="model">
     <schema-form
       :layout="layout"
-      :module="module"
+      :model="model"
       :schema="schema"
       :options="options"
     >
@@ -37,7 +37,7 @@ export default {
       // 表单布局
       layout: ${formatCode(layout)},
       // 表单绑定模型
-      module: ${formatCode(module)},
+      model: ${formatCode(model)},
       // 表单 schema
       schema: ${formatCode(schema)},
       // 表单 options

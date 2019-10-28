@@ -12,10 +12,10 @@
 
 ```vue
 <template>
-  <el-form size="small" label-position="left" label-width="80px" :model="module">
+  <el-form size="small" label-position="left" label-width="80px" :model="model">
     <schema-form
       :layout="layout"
-      :module="module"
+      :model="model"
       :schema="schema"
       :options="options"
     >
@@ -30,7 +30,7 @@ export default {
       // 表单布局
       layout: {},
       // 表单绑定模型
-      module: {},
+      model: {},
       // 表单 schema
       schema: [],
       // 表单 options

@@ -1,8 +1,8 @@
 <template>
   <div class="page-form">
-    <el-form :model="module" label-width="80px">
+    <el-form :model="model" label-width="80px">
       <schema-form
-        :module="module"
+        :model="model"
         :schema="formSchema"
         :options="options"
       >
@@ -15,13 +15,13 @@
 </template>
 
 <script>
-import { module, schema, options } from './const.js'
+import { model, schema, options } from './const.js'
 
 export default {
   name: 'TestPage',
   data () {
     return {
-      module,
+      model,
       options,
       schema
     }
