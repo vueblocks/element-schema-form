@@ -14,7 +14,13 @@ import './theme/index.css'
 import 'codemirror/theme/cobalt.css'
 import 'codemirror/mode/javascript/javascript.js'
 
-import SchemaForm, { SchemaFormItem, SchemaFormJsoneditor, SchemaFormQuill, SchemaFormCodemirror } from '../src/index'
+import SchemaForm, {
+  SchemaFormItem,
+  SchemaFormJsoneditor,
+  SchemaFormQuill,
+  SchemaFormCodemirror
+// } from '../src/index'
+} from '../lib/element-schema-form.common'
 
 Vue.use(ElementUI, {
   size: 'small'

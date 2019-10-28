@@ -1,4 +1,5 @@
 const path = require('path')
+const TerserPlugin = require('terser-webpack-plugin')
 
 const isProd = process.env.NODE_ENV === 'production'
 const isLib = process.env.VUE_APP_BUILD_MODE === 'lib'
@@ -28,14 +29,36 @@ const setChainWebpack = config => {
       .set('maxAssetSize', 2000000)
     // 压缩代码
     config.optimization.minimize(true)
+    config.optimization.minimizer('terser').tap((args) => {
+      args[0].terserOptions.compress.drop_console = true
+      return args
+    })
   }
 }
 
 const setConfigureWebpack = config => {
+  const externalLibs = [
+    'codemirror',
+    'quill',
+    'jsoneditor',
+    'vue-codemirror-lite',
+    'vue2-editor'
+  ]
   // 将 vue 设置为外部依赖
-  let externals = [{
-    vue: 'vue'
-  }]
+  let externals = [
+    {
+      vue: 'vue'
+    },
+    function (context, request, callback) {
+      for (const lib of externalLibs) {
+        const reg = new RegExp(`^${lib}`)
+        if (reg.test(request)) {
+          return callback(null, lib)
+        }
+      }
+      callback()
+    }
+  ]
   return isLib ? {
     externals
   } : {}
