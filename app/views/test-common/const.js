@@ -1,4 +1,4 @@
-export const module = {
+export const model = {
   name: 'lk',
   age: '18',
   phone: '',

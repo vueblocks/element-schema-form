@@ -1,4 +1,4 @@
-export const module = {
+export const model = {
   json: {
     a: 10,
     b: 20,

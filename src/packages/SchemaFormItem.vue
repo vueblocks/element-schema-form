@@ -6,7 +6,7 @@
       v-on="$listeners"
       :is="getComponentName(col.type)"
       :prop="col.prop"
-      :value.sync="module[col.prop]"
+      :value.sync="model[col.prop]"
       :modifier="col.modifier"
       :dynamicAttrs="col.dynamicAttrs"
       :onEvents="col.on"
@@ -21,7 +21,7 @@
 <script>
 export default {
   props: {
-    module: { // 绑定的value值
+    model: { // 绑定的value值
       type: Object
     },
     options: { // 多选值绑定的陪选项目

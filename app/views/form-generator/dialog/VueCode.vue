@@ -63,7 +63,7 @@ export default {
       const vueCode = getVueCode({
         formSettings: this.formSettings,
         layout: this.layout,
-        module: this.model,
+        model: this.model,
         schema: this.schema,
         options: this.options
       })

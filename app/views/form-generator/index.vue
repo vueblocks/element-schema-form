@@ -19,7 +19,7 @@
           :size="formSettings.size"
           :label-width="formSettings.labelWidth">
           <main-panel
-            :module="formModel"
+            :model="formModel"
             :schema="layoutSections"
             :options="formOptions"
             :layout="formLayout"

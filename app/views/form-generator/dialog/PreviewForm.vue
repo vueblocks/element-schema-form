@@ -14,7 +14,7 @@
         :model="editModule">
         <schema-form
           :layout="layout"
-          :module="editModule"
+          :model="editModule"
           :schema="schema"
           :options="options"
         >

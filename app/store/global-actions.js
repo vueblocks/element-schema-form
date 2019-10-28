@@ -23,7 +23,7 @@ export default {
       }
       return item
     })
-    commit(types.UPDATE_LAYOUT_SECTIONS, _list.insert(activeSection, result).toJS())
+    commit(types.UPDATE_LAYOUT_SECTIONS, _list.insert(activeSection + 1, result).toJS())
     let _form = Immutable.fromJS(formModel)
     let _option = Immutable.fromJS(formOptions)
     propList.forEach(({ oldProp, newProp }) => {

@@ -13,7 +13,7 @@ export default {
         return val.every(arr => Array.isArray(arr) && arr.length > 0)
       }
     },
-    module: { // 绑定的value值
+    model: { // 绑定的value值
       type: Object,
       required: true,
       default () { return {} }
