@@ -11,13 +11,29 @@
     "build:lib": "vue-cli-service build --mode lib --target lib --dest lib src/index.js",
     "report": "vue-cli-service build --mode lib --target lib --dest lib --report src/index.js",
     "lint": "vue-cli-service lint",
-    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0"
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs"
   },
   "dependencies": {
     "core-js": "^2.6.5",
+    "element-ui": "^2.11.1",
+    "immutable": "^4.0.0-rc.12",
+    "js-shortid": "^0.1.1",
+    "jsoneditor": "^7.0.1",
+    "lodash.clonedeep": "^4.5.0",
+    "lodash.isequal": "^4.5.0",
+    "normalize.css": "^8.0.1",
     "vue": "^2.6.10",
+    "vue-clipboard2": "^0.3.1",
+    "vue-codemirror-lite": "^1.0.4",
+    "vue-json-viewer": "^2.2.5",
     "vue-router": "^3.0.3",
-    "vuex": "^3.0.1"
+    "vue-slider-component": "^3.0.39",
+    "vue2-editor": "^2.10.2",
+    "vuedraggable": "^2.23.0",
+    "vuex": "^3.0.1",
+    "vuex-persistedstate": "^2.5.4"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.10.0",
@@ -25,6 +41,10 @@
     "@vue/cli-service": "^3.10.0",
     "@vue/eslint-config-standard": "^4.0.0",
     "babel-eslint": "^10.0.1",
+    "babel-plugin-component": "^1.1.1",
+    "babel-plugin-lodash": "^3.3.4",
+    "babel-plugin-transform-remove-console": "^6.9.4",
+    "element-theme-chalk": "^2.10.1",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
     "less": "^3.0.4",
