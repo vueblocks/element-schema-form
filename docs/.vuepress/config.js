@@ -1,7 +1,7 @@
 module.exports = {
-  title: 'Element Form Generator',
-  description: '基于 Element 的表单设计器，表单开发利器。',
-  base: '/docs/',
+  title: 'Element Schema Form',
+  description: '基于 JSON Schema 构建 Element 表单',
+  base: '/element-schema-form/',
   port: 5454,
   themeConfig: {
     sidebarDepth: 2,
