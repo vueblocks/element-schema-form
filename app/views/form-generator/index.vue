@@ -11,6 +11,7 @@
             <el-button type="warning" size="mini" @click="showSchemaCode = true">生成 Schema</el-button>
             <el-button type="danger" size="mini" @click="showVueCode = true">生成 Vue 代码</el-button>
             <el-button type="success" size="mini"  @click="showResult = true">预览表单</el-button>
+            <el-button size="mini"  @click="resetGlobalStore">重置表单</el-button>
           </div>
         </div>
         <el-form
@@ -132,7 +133,8 @@ export default {
   },
   methods: {
     ...mapActions([
-      'addComponent'
+      'addComponent',
+      'resetGlobalStore'
     ]),
     handleAddComponent (comp, scope) {
       const { rowIndex, colIndex } = scope

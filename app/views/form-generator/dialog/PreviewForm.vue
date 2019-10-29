@@ -19,7 +19,7 @@
           :options="options"
         >
         </schema-form>
-       </el-form>
+      </el-form>
     </el-dialog>
   </div>
 </template>

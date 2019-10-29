@@ -1,22 +1,28 @@
 {
-  "name": "element-form-generator",
+  "name": "@vueblocks/element-schema-form",
   "version": "0.1.0",
   "description": "A schema-based form generator component for Element UI.",
   "author": "xiaoluoboding <xiaoluoboding@gmail.com>",
-  "main": "lib/element-form-generator.min.js",
-  "unpkg": "lib/element-form-generator.umd.min.js",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "build:lib": "vue-cli-service build --mode lib --target lib --dest lib src/index.js",
-    "report": "vue-cli-service build --mode lib --target lib --dest lib --report src/index.js",
     "lint": "vue-cli-service lint",
+    "build:lib": "vue-cli-service build --mode lib --target lib --name element-schema-form --dest lib src/index.js",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
+    "docs:build": "vuepress build docs",
     "docs:dev": "vuepress dev docs",
-    "docs:build": "vuepress build docs"
+    "docs:deploy": "sh deploy.sh",
+    "report": "vue-cli-service build --mode lib --target lib --name element-schema-form --dest lib --report src/index.js"
   },
+  "main": "lib/element-schema-form.umd.min.js",
+  "unpkg": "lib/element-schema-form.umd.min.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vueblocks/element-form-generator.git"
+  },
+  "license": "MIT",
   "dependencies": {
-    "core-js": "^2.6.5",
+    "core-js": "^3.3.2",
     "element-ui": "^2.11.1",
     "immutable": "^4.0.0-rc.12",
     "js-shortid": "^0.1.1",
@@ -36,9 +42,9 @@
     "vuex-persistedstate": "^2.5.4"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.10.0",
-    "@vue/cli-plugin-eslint": "^3.10.0",
-    "@vue/cli-service": "^3.10.0",
+    "@vue/cli-plugin-babel": "^4.0.5",
+    "@vue/cli-plugin-eslint": "^4.0.5",
+    "@vue/cli-service": "^4.0.5",
     "@vue/eslint-config-standard": "^4.0.0",
     "babel-eslint": "^10.0.1",
     "babel-plugin-component": "^1.1.1",
@@ -49,6 +55,7 @@
     "eslint-plugin-vue": "^5.0.0",
     "less": "^3.0.4",
     "less-loader": "^4.1.0",
+    "terser-webpack-plugin": "^2.2.1",
     "vue-template-compiler": "^2.6.10"
   }
 }

@@ -2,6 +2,10 @@ import types from './mutation-types'
 import Immutable from 'immutable'
 import shortid from 'js-shortid'
 
+const makeAction = type => {
+  return ({ commit }, ...args) => commit(type, ...args)
+}
+
 export default {
   addRow ({ commit, state }, reload) {
     let { layoutSections } = state
@@ -67,7 +71,7 @@ export default {
     let _list = Immutable.fromJS(layoutSections)
     commit(types.UPDATE_LAYOUT_SECTIONS, _list.set(activeSection, newVal).toJS())
   },
-  async delteColComp ({ commit, state, dispatch }, { colIndex, newVal, prop }) {
+  async deleteColComp ({ commit, state, dispatch }, { colIndex, newVal, prop }) {
     let { layoutSections, activeSection } = state
     let _list = Immutable.fromJS(layoutSections)
     console.log(1)
@@ -123,5 +127,6 @@ export default {
         ] })
     }
     commit(types.UPDATE_ACTIVE_PROP, `default_${_propIdx}`)
-  }
+  },
+  resetGlobalStore: makeAction('RESET_GLOBAL_STORE')
 }
