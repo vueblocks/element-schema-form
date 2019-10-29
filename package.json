@@ -18,7 +18,7 @@
   "unpkg": "lib/element-schema-form.umd.min.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vueblocks/element-form-generator.git"
+    "url": "git+https://github.com/vueblocks/element-schema-form.git"
   },
   "license": "MIT",
   "dependencies": {
