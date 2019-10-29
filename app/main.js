@@ -19,8 +19,8 @@ import SchemaForm, {
   SchemaFormJsoneditor,
   SchemaFormQuill,
   SchemaFormCodemirror
-// } from '../src/index'
-} from '../lib/element-schema-form.common'
+} from '../src/index'
+// } from '../lib/element-schema-form.common'
 
 Vue.use(ElementUI, {
   size: 'small'
