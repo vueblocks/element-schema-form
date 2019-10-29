@@ -7,7 +7,7 @@ module.exports = {
     sidebarDepth: 2,
     nav: [
       { text: '指南', link: '/guide/' },
-      { text: '组件', link: '/guide/component/SchemaForm' },
+      { text: '组件', link: '/guide/component/SchemaForm/' },
       {
         text: '表单设计器',
         link: 'https://github.com/vueblocks/element-form-generator'
