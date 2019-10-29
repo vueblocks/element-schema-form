@@ -8,7 +8,10 @@ module.exports = {
     nav: [
       { text: '指南', link: '/guide/' },
       { text: '组件', link: '/guide/component/SchemaForm' },
-      { text: '表单设计器', link: '/form-generator/' },
+      {
+        text: '表单设计器',
+        link: 'https://github.com/vueblocks/element-form-generator'
+      },
       {
         text: 've-charts',
         link: 'https://github.com/vueblocks/ve-charts'
@@ -28,6 +31,7 @@ module.exports = {
             '快速开始',
             '更新日志',
             '在线示例',
+            '设计导图',
           ]
         },
         {
