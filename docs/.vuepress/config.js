@@ -15,7 +15,7 @@ module.exports = {
       },
       {
         text: 'GitHub',
-        link: 'https://github.com/vueblocks/element-form-generator'
+        link: 'https://github.com/vueblocks/element-schema-form'
       },
     ],
     sidebar: {
