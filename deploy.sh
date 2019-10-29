@@ -20,6 +20,6 @@ git commit -m 'chore: deploy docs'
 # git push -f git@github.com:<USERNAME>/<USERNAME>.github.io.git master
 
 # 如果发布到 https://<USERNAME>.github.io/<REPO>
-git push -f git@github.com:vueblocks/element-form-schema.git master:gh-pages
+git push -f git@github.com/vueblocks/element-schema-form.git master:gh-pages
 
 cd -
