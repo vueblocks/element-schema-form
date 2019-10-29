@@ -1,6 +1,6 @@
 {
   "name": "@vueblocks/element-schema-form",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A schema-based form generator component for Element UI.",
   "author": "xiaoluoboding <xiaoluoboding@gmail.com>",
   "scripts": {
@@ -21,25 +21,12 @@
     "url": "git+https://github.com/vueblocks/element-schema-form.git"
   },
   "license": "MIT",
+  "peerDependencies": {
+    "element-ui": "^2.11.1"
+  },
   "dependencies": {
     "core-js": "^3.3.2",
-    "element-ui": "^2.11.1",
-    "immutable": "^4.0.0-rc.12",
-    "js-shortid": "^0.1.1",
-    "jsoneditor": "^7.0.1",
-    "lodash.clonedeep": "^4.5.0",
-    "lodash.isequal": "^4.5.0",
-    "normalize.css": "^8.0.1",
-    "vue": "^2.6.10",
-    "vue-clipboard2": "^0.3.1",
-    "vue-codemirror-lite": "^1.0.4",
-    "vue-json-viewer": "^2.2.5",
-    "vue-router": "^3.0.3",
-    "vue-slider-component": "^3.0.39",
-    "vue2-editor": "^2.10.2",
-    "vuedraggable": "^2.23.0",
-    "vuex": "^3.0.1",
-    "vuex-persistedstate": "^2.5.4"
+    "vue": "^2.6.10"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.0.5",
@@ -50,12 +37,20 @@
     "babel-plugin-component": "^1.1.1",
     "babel-plugin-lodash": "^3.3.4",
     "babel-plugin-transform-remove-console": "^6.9.4",
+    "element-ui": "^2.11.1",
     "element-theme-chalk": "^2.10.1",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
+    "jsoneditor": "^7.0.1",
+    "lodash.clonedeep": "^4.5.0",
+    "lodash.isequal": "^4.5.0",
     "less": "^3.0.4",
     "less-loader": "^4.1.0",
-    "terser-webpack-plugin": "^2.2.1",
-    "vue-template-compiler": "^2.6.10"
+    "normalize.css": "^8.0.1",
+    "vue-codemirror-lite": "^1.0.4",
+    "vue-router": "^3.0.3",
+    "vue-template-compiler": "^2.6.10",
+    "vue2-editor": "^2.10.2",
+    "vuex": "^3.0.1"
   }
 }

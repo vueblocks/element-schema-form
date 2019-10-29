@@ -1,5 +1,4 @@
 const path = require('path')
-const TerserPlugin = require('terser-webpack-plugin')
 
 const isProd = process.env.NODE_ENV === 'production'
 const isLib = process.env.VUE_APP_BUILD_MODE === 'lib'
@@ -9,7 +8,6 @@ const setChainWebpack = config => {
   // 修改默认目录简写
   config.resolve.alias
     .set('@', path.resolve('app'))
-    .set('@lib', resolve('src'))
   // 添加对 app 目录的支持
   config.module
     .rule('js')

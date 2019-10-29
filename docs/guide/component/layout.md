@@ -1,8 +1,7 @@
 
 ### 简介
 
-SchemaForm 整体布局采用 el-row 和 el-col 进行分装, 通过基础的24分栏，迅速简便地创建布局
-
+SchemaForm 整体布局采用 el-row 和 el-col 进行封装, 通过基础的24分栏，迅速简便地创建布局
 
 **layout Attributes**
 
@@ -15,6 +14,7 @@ align|flex布局下的垂直排列方式|string|top/middle/bottom|top
 tag|自定义元素标签|string|*|div
 
 **colGrid Attributes**
+
 参数|说明|类型|可选值|默认值
 :--|:--|:--|:--|:--|
 span|栅格占据的列数|number|—|24

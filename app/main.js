@@ -1,15 +1,12 @@
 import Vue from 'vue'
 
 import 'normalize.css'
-import './plugins/json-viewer'
-import './plugins/clipboard2'
 
-import App from './App.vue'
 import router from './router'
-import store from './store'
 
 import ElementUI from 'element-ui'
-import './theme/index.css'
+import 'element-ui/lib/theme-chalk/index.css'
+
 // 引入codeMirror的样式
 import 'codemirror/theme/cobalt.css'
 import 'codemirror/mode/javascript/javascript.js'
@@ -21,6 +18,8 @@ import SchemaForm, {
   SchemaFormCodemirror
 } from '../src/index'
 // } from '../lib/element-schema-form.common'
+
+import App from './App.vue'
 
 Vue.use(ElementUI, {
   size: 'small'
@@ -50,6 +49,5 @@ Vue.config.productionTip = false
 
 new Vue({
   router,
-  store,
   render: h => h(App)
 }).$mount('#app')
