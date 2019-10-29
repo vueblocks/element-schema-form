@@ -24,7 +24,7 @@ module.exports = {
           title: '指南',
           collapsable: false,
           children: [
-            '/guide/',
+            '',
             '快速开始',
             '更新日志',
             '在线示例',

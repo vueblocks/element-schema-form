@@ -5,15 +5,15 @@
       <figcaption class="component-panel__figcaption">
         <span>通用属性</span>
       </figcaption>
-        <label-layout title="标签名称:">
-          <el-input v-model="editInfo.formItem.label"></el-input>
-        </label-layout>
-        <label-layout title="数据字段:">
-          <el-input v-model="editInfo.prop"></el-input>
-        </label-layout>
-        <label-layout title="栅格数:">
-          <el-input v-model.number="editInfo.colGrid.span"></el-input>
-        </label-layout>
+      <label-layout title="标签名称:">
+        <el-input v-model="editInfo.formItem.label"></el-input>
+      </label-layout>
+      <label-layout title="数据字段:">
+        <el-input v-model="editInfo.prop"></el-input>
+      </label-layout>
+      <label-layout title="栅格数:">
+        <el-input v-model.number="editInfo.colGrid.span"></el-input>
+      </label-layout>
     </fieldset>
     <!-- 定制属性 -->
     <fieldset class="component-panel__fieldset">

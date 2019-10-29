@@ -99,7 +99,7 @@ export default {
       'editRow',
       'deleteRow',
       'changeRow',
-      'delteColComp'
+      'deleteColComp'
     ]),
     checkMove (e) {
       console.log('Future index: ' + e.draggedContext.futureIndex)
@@ -109,7 +109,7 @@ export default {
         isCustom: 'btn-addCol',
         colGrid: element.colGrid
       }
-      this.delteColComp({ colIndex, newVal: oldSection, prop: element.prop })
+      this.deleteColComp({ colIndex, newVal: oldSection, prop: element.prop })
     },
     onAddRow (data) {
       const initVal = data.map((val, idx) => {
