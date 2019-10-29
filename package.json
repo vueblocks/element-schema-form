@@ -11,6 +11,7 @@
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
     "docs:build": "vuepress build docs",
     "docs:dev": "vuepress dev docs",
+    "docs:deploy": "sh deploy.sh",
     "report": "vue-cli-service build --mode lib --target lib --name element-schema-form --dest lib --report src/index.js"
   },
   "main": "lib/element-schema-form.umd.min.js",
