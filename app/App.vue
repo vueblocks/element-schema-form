@@ -12,7 +12,6 @@
         @select="handleSelect">
         <el-menu-item index="1" route="/test-common">基础组件</el-menu-item>
         <el-menu-item index="2" route="/test-extend">扩展组件</el-menu-item>
-        <el-menu-item index="3" route="/form-generator">表单生成器</el-menu-item>
       </el-menu>
     </el-header>
   <el-main>
