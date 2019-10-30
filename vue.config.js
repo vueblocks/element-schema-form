@@ -36,17 +36,14 @@ const setChainWebpack = config => {
 
 const setConfigureWebpack = config => {
   const externalLibs = [
+    'vue',
     'codemirror',
-    'quill',
     'jsoneditor',
     'vue-codemirror-lite',
     'vue2-editor'
   ]
   // 将 vue 设置为外部依赖
   let externals = [
-    {
-      vue: 'vue'
-    },
     function (context, request, callback) {
       for (const lib of externalLibs) {
         const reg = new RegExp(`^${lib}`)

@@ -1,10 +1,10 @@
-import SchemaForm from './packages/SchemaForm'
-import SchemaFormInput from './packages/components/SchemaFormInput'
-import SchemaFormSelect from './packages/components/SchemaFormSelect'
-import SchemaFormRadio from './packages/components/SchemaFormRadio'
-import SchemaFormDatepicker from './packages/components/SchemaFormDatepicker'
-import SchemaFormCascader from './packages/components/SchemaFormCascader'
-import SchemaFormPlaceholder from './packages/components/SchemaFormPlaceholder'
+import SchemaForm from './packages/SchemaForm.vue'
+import SchemaFormInput from './packages/components/SchemaFormInput.vue'
+import SchemaFormSelect from './packages/components/SchemaFormSelect.vue'
+import SchemaFormRadio from './packages/components/SchemaFormRadio.vue'
+import SchemaFormDatepicker from './packages/components/SchemaFormDatepicker.vue'
+import SchemaFormCascader from './packages/components/SchemaFormCascader.vue'
+import SchemaFormPlaceholder from './packages/components/SchemaFormPlaceholder.vue'
 import SchemaFormCheckbox from './packages/components/SchemaFormCheckbox.vue'
 import SchemaFormSlider from './packages/components/SchemaFormSlider.vue'
 import SchemaFormTimeselect from './packages/components/SchemaFormTimeselect.vue'
@@ -14,10 +14,7 @@ import SchemaFormColorpicker from './packages/components/SchemaFormColorpicker.v
 import SchemaFormTags from './packages/components/SchemaFormTags.vue'
 import SchemaFormProgress from './packages/components/SchemaFormProgress.vue'
 
-import SchemaFormJsoneditor from './packages/components/SchemaFormJsoneditor.vue'
-import SchemaFormQuill from './packages/components/SchemaFormQuill.vue'
-import SchemaFormCodemirror from './packages/components/SchemaFormCodemirror.vue'
-import SchemaFormItem from './packages/SchemaFormItem'
+import SchemaFormItem from './packages/SchemaFormItem.vue'
 
 import FormMixin from './packages/mixins/form-mixin'
 import LayoutMixin from './packages/mixins/layout-mixin'
@@ -51,11 +48,8 @@ export default install
 
 export {
   SchemaForm,
-  FormMixin,
-  SchemaFormJsoneditor,
-  SchemaFormQuill,
-  SchemaFormCodemirror,
   SchemaFormItem,
+  FormMixin,
   LayoutMixin
 }
 
