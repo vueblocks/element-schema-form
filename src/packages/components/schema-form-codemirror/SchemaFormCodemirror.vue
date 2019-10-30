@@ -10,10 +10,9 @@
 
 <script>
 import { codemirror } from 'vue-codemirror-lite'
-import 'codemirror/lib/codemirror.css'
 
-import FormMixin from '../mixins/form-mixin'
-import FormCodeMirrorMixin from '../mixins/form-code-mirror-mixin'
+import FormMixin from '../../mixins/form-mixin'
+import FormCodeMirrorMixin from '../../mixins/form-code-mirror-mixin'
 
 export default {
   name: 'SchemaFormCodemirror',

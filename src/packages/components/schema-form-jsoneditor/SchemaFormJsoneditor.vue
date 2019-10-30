@@ -9,11 +9,10 @@
 
 <script>
 
-import FormMixin from '../mixins/form-mixin'
-import FormJsonEditorMixin from '../mixins/form-json-editor-mixin'
+import FormMixin from '../../mixins/form-mixin'
+import FormJsonEditorMixin from '../../mixins/form-json-editor-mixin'
 
-import JSONEditor from 'jsoneditor/dist/jsoneditor.min.js'
-import 'jsoneditor/dist/jsoneditor.min.css'
+import JSONEditor from 'jsoneditor/dist/jsoneditor.js'
 
 export default {
   name: 'SchemaFormJsoneditor',

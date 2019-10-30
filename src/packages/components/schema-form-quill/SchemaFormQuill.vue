@@ -10,7 +10,7 @@
 
 import { VueEditor } from 'vue2-editor'
 
-import FormMixin from '../mixins/form-mixin'
+import FormMixin from '../../mixins/form-mixin'
 
 export default {
   name: 'SchemaFormQuill',

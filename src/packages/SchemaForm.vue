@@ -28,7 +28,7 @@
 
 <script>
 import LayoutMixin from './mixins/layout-mixin'
-import SchemaFormItem from './SchemaFormItem'
+import SchemaFormItem from './SchemaFormItem.vue'
 
 export default {
   name: 'SchemaForm',
@@ -37,7 +37,7 @@ export default {
     SchemaFormItem
   },
   mounted () {
-    console.log(this.$slots)
+    // console.log(this.$slots)
   }
 }
 </script>
