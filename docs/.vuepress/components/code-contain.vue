@@ -1,5 +1,5 @@
 <template>
-  <el-card shadow="hover">
+  <el-card shadow="hover" class="code-contain">
     <section class="display-area">
       <component :is="compName"></component>
     </section>
@@ -15,10 +15,15 @@
 </template>
 
 <script>
-
+// 在线示例
 import BasicValidate from './basic-validate'
 import ValidateNumber from './validate-number'
 import AddItem from './add-item'
+// layout 布局
+import LayoutGutter from './layout-gutter'
+import LayoutOffset from './layout-offset'
+import LayoutFlexible from './layout-flexible'
+
 
 export default {
   props: {
@@ -31,7 +36,10 @@ export default {
   components: {
     BasicValidate,
     ValidateNumber,
-    AddItem
+    AddItem,
+    LayoutGutter,
+    LayoutOffset,
+    LayoutFlexible
   },
   data () {
     return {
@@ -48,6 +56,9 @@ export default {
 </style>
 
 <style  scoped>
+.code-contain{
+  margin-top:10px;
+}
 .display-area {
   padding: 20px;
 }

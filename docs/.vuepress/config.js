@@ -41,8 +41,7 @@ module.exports = {
           children: [
             '/guide/component/SchemaForm',
             ['/guide/component/schema', 'schema 详解'],
-            ['/guide/component/layout', 'layout 布局'],
-            '/guide/component/SchemaFormItem'
+            ['/guide/component/layout', 'layout 布局']
           ]
         }
       ]
