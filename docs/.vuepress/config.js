@@ -10,7 +10,7 @@ module.exports = {
       { text: '组件', link: '/guide/component/SchemaForm/' },
       {
         text: '表单设计器',
-        link: 'https://github.com/vueblocks/element-form-generator'
+        link: 'https://vueblocks.github.io/element-form-generator/'
       },
       {
         text: 've-charts',
