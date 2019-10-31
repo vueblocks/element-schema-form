@@ -22,7 +22,10 @@ import AddItem from './add-item'
 import LayoutGutter from './layout-gutter'
 import LayoutOffset from './layout-offset'
 import LayoutFlexible from './layout-flexible'
-
+// slot 布局
+import SlotFront from './slot-front'
+import SlotRear from './slot-rear'
+import SlotSlot from './slot-slot'
 
 export default {
   props: {
@@ -38,7 +41,10 @@ export default {
     AddItem,
     LayoutGutter,
     LayoutOffset,
-    LayoutFlexible
+    LayoutFlexible,
+    SlotFront,
+    SlotRear,
+    SlotSlot
   },
   data () {
     return {

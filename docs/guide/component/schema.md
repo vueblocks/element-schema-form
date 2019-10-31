@@ -113,12 +113,11 @@ on: {
 }
 ```
 
-## 插槽 slot
+## 插槽 slot 
 
 参数|说明|
 :--|:--
 slot| 自定义完整组件
 frontSlot| 定义element 组件前的插槽
-compSlot| 定义element 组件内的插槽
 rearSlot| 定义element 组件后的插槽
 
