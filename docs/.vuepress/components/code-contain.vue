@@ -11,7 +11,6 @@
       <a class="previewArea__link" :href="link" target="_blank">在线运行</a>
     </div>
   </el-card>
-  </section>
 </template>
 
 <script>
