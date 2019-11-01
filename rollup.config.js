@@ -1,5 +1,6 @@
-import cjs from 'rollup-plugin-commonjs'
 import babel from 'rollup-plugin-babel'
+import cjs from 'rollup-plugin-commonjs'
+import filesize from 'rollup-plugin-filesize'
 import json from 'rollup-plugin-json'
 import node from 'rollup-plugin-node-resolve'
 import vue from 'rollup-plugin-vue'
@@ -17,6 +18,7 @@ const plugins = [
   cjs({
     sourceMap: false
   }),
+  filesize(),
   json(),
   node(),
   vue()
