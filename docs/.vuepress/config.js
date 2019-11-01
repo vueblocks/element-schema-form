@@ -10,7 +10,7 @@ module.exports = {
       { text: '组件', link: '/guide/component/SchemaForm/' },
       {
         text: '表单设计器',
-        link: 'https://github.com/vueblocks/element-form-generator'
+        link: 'https://vueblocks.github.io/element-form-generator/'
       },
       {
         text: 've-charts',
@@ -42,10 +42,12 @@ module.exports = {
             '/guide/component/SchemaForm',
             ['/guide/component/schema', 'schema 详解'],
             ['/guide/component/layout', 'layout 布局'],
-            '/guide/component/SchemaFormItem'
+            ['/guide/component/slot', 'slot 插槽'],
+            ['/guide/component/dynamic', 'dynamicAttrs 动态属性'],
+            ['/guide/component/custom', '自定义组件']
           ]
         }
       ]
     }
-  },
+  }
 }

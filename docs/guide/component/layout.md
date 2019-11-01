@@ -3,6 +3,25 @@
 
 SchemaForm 整体布局采用 el-row 和 el-col 进行封装, 通过基础的24分栏，迅速简便地创建布局
 
+### 分栏间隔
+
+<code-contain compName="LayoutGutter" link="https://codesandbox.io/s/fenlanjiange-8tbs8?fontsize=14">  
+<<< @/docs/.vuepress/components/layout-gutter.vue
+</code-contain>
+
+### 分栏偏移
+
+<code-contain compName="LayoutOffset" link="https://codesandbox.io/s/fenlanpianyi-z127w?fontsize=14">  
+<<< @/docs/.vuepress/components/layout-offset.vue
+</code-contain>
+
+### 响应式布局
+
+<code-contain compName="LayoutFlexible" link="https://codesandbox.io/s/xiangyingshibuju-xbdlp?fontsize=14">  
+<<< @/docs/.vuepress/components/layout-flexible.vue
+</code-contain>
+
+
 **layout Attributes**
 
 参数|说明|类型|可选值|默认值

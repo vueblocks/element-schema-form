@@ -12,7 +12,6 @@
       :onEvents="col.on"
       :options="options[col.prop]"
     >
-      <slot :name="col.compSlot" v-if="col.compSlot"></slot>
     </component>
     <slot :name="col.rearSlot" v-if="col.rearSlot"></slot>
   </el-form-item>
