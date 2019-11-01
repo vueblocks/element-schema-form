@@ -42,7 +42,9 @@ module.exports = {
             '/guide/component/SchemaForm',
             ['/guide/component/schema', 'schema 详解'],
             ['/guide/component/layout', 'layout 布局'],
-            ['/guide/component/slot', 'slot 插槽']
+            ['/guide/component/slot', 'slot 插槽'],
+            ['/guide/component/dynamic', 'dynamicAttrs 动态属性'],
+            ['/guide/component/custom', '自定义组件']
           ]
         }
       ]

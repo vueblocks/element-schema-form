@@ -26,6 +26,10 @@ import LayoutFlexible from './layout-flexible'
 import SlotFront from './slot-front'
 import SlotRear from './slot-rear'
 import SlotSlot from './slot-slot'
+// 自定义组件
+import CustomInput from './custom-input'
+// 动态属性
+import DynamicInput from './dynamic-input'
 
 export default {
   props: {
@@ -44,7 +48,9 @@ export default {
     LayoutFlexible,
     SlotFront,
     SlotRear,
-    SlotSlot
+    SlotSlot,
+    CustomInput,
+    DynamicInput
   },
   data () {
     return {
