@@ -5,7 +5,7 @@
 ---
 
 
-### 组件使用
+## 组件使用
 
 ```vue
 <template>
@@ -38,16 +38,16 @@ export default {
 </script>
 ```
 
-### Props
+## Props
 
-#### layout
+### layout
 
-##### 表单布局信息，详见 [layout布局](layout.html)
+#### 表单布局信息，详见 [layout布局](layout.html)
 
 
-#### model
+### model
 
-##### 表单数据对象,表单绑定值的集合,例如
+#### 表单数据对象,表单绑定值的集合,例如
 ``` js
 {
   model: {
@@ -57,8 +57,8 @@ export default {
 }
 ```
 
-#### schema
-##### 表单模板，用于表单的构建。详情见 [schema 详解](schema.html)
+### schema
+#### 表单模板，用于表单的构建。详情见 [schema 详解](schema.html)
 
 参数|说明|类型|可选值|默认值
 :--|:--|:--|:--|:--
@@ -72,9 +72,9 @@ on|组件事件|object|-|-
 hide|是否隐藏|boolean|-|false
 colGrid|栅格布局,与el-col属性相同|object|-|-
 
-#### options
+### options
 
-##### 表单可选数据源，如我们常用的 el-select 的数据源
+#### 表单可选数据源，如我们常用的 el-select 的数据源
 ``` js
 {
   options: {

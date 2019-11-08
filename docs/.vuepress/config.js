@@ -1,6 +1,6 @@
 module.exports = {
   title: 'Element Schema Form',
-  description: '基于 JSON Schema 构建 Element 表单',
+  description: '基于 JSON Schema 构建 Element 表单，表单页面开发从未如此高效',
   base: '/element-schema-form/',
   port: 5454,
   themeConfig: {
@@ -31,7 +31,6 @@ module.exports = {
             '快速开始',
             '更新日志',
             '在线示例',
-            '设计导图',
           ]
         },
         {
