@@ -21,7 +21,7 @@ export default {
   computed: {
     schema () {
       return [
-        [ 
+        [
           {
             type: 'switch',
             prop: 'editable',
