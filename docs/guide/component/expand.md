@@ -18,9 +18,7 @@ import 'codemirror/mode/javascript/javascript.js' // mode: text/javascript
 Vue.use(SchemaFormCodemirror)
 ```
 
-<code-contain compName="ExpandCodeMirror" link="https://codesandbox.io/s/daimajingxiang-v1yce?fontsize=14">
 <<< @/docs/.vuepress/components/expand-code-mirror.vue
-</code-contain>
 
 查看 [CodeMirror Manual](https://codemirror.net/doc/manual.html#modloader) 了解更多配置和主题
 
