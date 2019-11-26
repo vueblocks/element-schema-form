@@ -25,8 +25,7 @@ const setChainWebpack = config => {
     config.performance
       .set('maxEntrypointSize', 2500000)
       .set('maxAssetSize', 2000000)
-    // 压缩代码
-    config.optimization.minimize(true)
+    // drop console
     config.optimization.minimizer('terser').tap((args) => {
       args[0].terserOptions.compress.drop_console = true
       return args
