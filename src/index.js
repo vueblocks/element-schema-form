@@ -8,6 +8,7 @@ import SchemaFormPlaceholder from './packages/components/SchemaFormPlaceholder.v
 import SchemaFormCheckbox from './packages/components/SchemaFormCheckbox.vue'
 import SchemaFormSlider from './packages/components/SchemaFormSlider.vue'
 import SchemaFormTimeselect from './packages/components/SchemaFormTimeselect.vue'
+import SchemaFormTimepicker from './packages/components/SchemaFormTimepicker.vue'
 import SchemaFormRate from './packages/components/SchemaFormRate.vue'
 import SchemaFormSwitch from './packages/components/SchemaFormSwitch.vue'
 import SchemaFormColorpicker from './packages/components/SchemaFormColorpicker.vue'
@@ -34,7 +35,8 @@ const components = [
   SchemaFormSwitch,
   SchemaFormColorpicker,
   SchemaFormTags,
-  SchemaFormProgress
+  SchemaFormProgress,
+  SchemaFormTimepicker
 ]
 
 function install (Vue, opts = {}) {

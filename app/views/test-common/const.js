@@ -73,9 +73,15 @@ export const schema = [
       formItem: { label: '成绩' },
       attrs: { 'show-stops': true, step: 10 }
     }, {
-      type: 'timeselect',
+      type: 'timepicker',
       prop: 'sleepTime',
-      formItem: { label: '晚睡时间' }
+      formItem: { label: '晚睡时间' },
+      attrs: {
+        'picker-options': {
+          selectableRange: '18:30:00 - 20:30:00'
+        },
+        'arrow-control': true
+      }
     }, {
       type: 'rate',
       prop: 'star',
