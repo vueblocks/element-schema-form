@@ -14,6 +14,7 @@
 </template>
 
 <script>
+
 // 在线示例
 import BasicValidate from './basic-validate'
 import ValidateNumber from './validate-number'
@@ -30,6 +31,8 @@ import SlotSlot from './slot-slot'
 import CustomInput from './custom-input'
 // 动态属性
 import DynamicInput from './dynamic-input'
+// 拓展组件
+import ExpandCodeMirror from './expand-code-mirror'
 
 export default {
   props: {
@@ -50,7 +53,8 @@ export default {
     SlotRear,
     SlotSlot,
     CustomInput,
-    DynamicInput
+    DynamicInput,
+    ExpandCodeMirror
   },
   data () {
     return {

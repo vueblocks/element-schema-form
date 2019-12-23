@@ -21,8 +21,7 @@ SchemaForm 整体布局采用 el-row 和 el-col 进行封装, 通过基础的24�
 <<< @/docs/.vuepress/components/layout-flexible.vue
 </code-contain>
 
-
-**layout Attributes**
+### layout Attributes
 
 参数|说明|类型|可选值|默认值
 :--|:--|:--|:--|:--|
@@ -32,7 +31,7 @@ justify|flex布局下的水平排列方式|string|start/end/center/space-around/
 align|flex布局下的垂直排列方式|string|top/middle/bottom|top
 tag|自定义元素标签|string|*|div
 
-**colGrid Attributes**
+### colGrid Attributes
 
 参数|说明|类型|可选值|默认值
 :--|:--|:--|:--|:--|

@@ -1,12 +1,12 @@
 ## 数据字段 prop
 
-##### prop 是辨别当前组件的唯一字段，既是 ```model 和 options  的键值 key ```，又是```el-form``` 使用 ```validate、resetFields``` 方法的必填字段，所以需保证 prop的 唯一性
+> prop 是辨别当前组件的唯一字段，既是 ```model 和 options  的键值 key ```，又是```el-form``` 使用 ```validate、resetFields``` 方法的必填字段，所以需保证 prop的 唯一性
 
 ## 组件类型 type
 
-##### SchemaForm 的组件是基于 Element 进行封装，目标是完美兼容原组件的所有属性
+> SchemaForm 的组件是基于 Element 进行封装，目标是完美兼容原组件的所有属性
 
-#### 内置类型
+### 内置类型
 
 类型|含义|属性参考
 :--|:--|:--
@@ -18,14 +18,15 @@ cascader| 级联选择器 | [el-cascader](https://element.eleme.cn/#/zh-CN/compo
 switch| 开关 | [el-switch](https://element.eleme.cn/#/zh-CN/component/switch)
 slider| 滑块 | [el-slider](https://element.eleme.cn/#/zh-CN/component/slider)
 datepicker| 日期选择器 | [el-date-picker](https://element.eleme.cn/#/zh-CN/component/date-picker)
-timeselect| 时间选择器 | [el-time-select](https://element.eleme.cn/#/zh-CN/component/time-picker)
+timeselect| 固定时间 | [el-time-select](https://element.eleme.cn/#/zh-CN/component/time-picker)
+timepicker| 任意时间 | [el-time-picker](https://element.eleme.cn/#/zh-CN/component/time-picker)
 colorpicker| 颜色选择器 | [el-color-picker](https://element.eleme.cn/#/zh-CN/component/color-picker)
 progress| 进度条 | [el-progress](https://element.eleme.cn/#/zh-CN/component/progress)
 rate| 评分 | [el-rate](https://element.eleme.cn/#/zh-CN/component/rate)
 
-## 表单属性 formItem 
+## 表单属性 formItem
 
-##### 兼容所有el-form-item的属性,以下内容为常用属性
+> 兼容所有el-form-item的属性,以下内容为常用属性
 
 参数|说明|类型|可选值|默认值
 :--|:--|:--|:--|:--
@@ -37,7 +38,7 @@ size|用于控制该表单域下组件的尺寸|string|medium / small / mini|-
 
 ## 绑定值修饰符 modifier
 
-##### 为了更好的支持数值绑定，增加了```v-model```的修饰符，现支持
+> 为了更好的支持数值绑定，增加了```v-model```的修饰符，现支持
 
 参数|说明
 :--|:--
@@ -46,7 +47,8 @@ trim|自动过滤用户输入的首尾空白字符
 
 ## 属性绑定 attrs 
 
-##### 支持Element组件的属性，以```el-input```为例,具体参数 可参考 [Element](https://element.eleme.cn/#/zh-CN)
+> 支持Element组件的属性，以```el-input```为例,具体参数 可参考 [Element](https://element.eleme.cn/#/zh-CN)
+
 ``` js
  {
    type: 'input',
@@ -57,7 +59,8 @@ trim|自动过滤用户输入的首尾空白字符
 
 ## 动态属性绑定 dynamicAttrs
 
-##### 除了绑定的静态属性外，还支持动态属性的绑定，例如用于与其它操作联动
+> 除了绑定的静态属性外，还支持动态属性的绑定，例如用于与其它操作联动
+
 ``` js
  {
    type: 'input',
@@ -65,9 +68,11 @@ trim|自动过滤用户输入的首尾空白字符
    dynamicAttrs: { disabled: !!this.model.id }
  }
 ```
+
 ## 事件绑定 on
 
-##### 支持Element组件的事件，以```el-input```为例,具体参数 可参考 [Element](https://element.eleme.cn/#/zh-CN)
+> 支持Element组件的事件，以```el-input```为例,具体参数 可参考 [Element](https://element.eleme.cn/#/zh-CN)
+
 ``` js
  {
    type: 'input',
@@ -75,9 +80,10 @@ trim|自动过滤用户输入的首尾空白字符
    on: { focus: this.onNameFocus }
  }
 ```
-#### 事件 & 按键修饰符
 
-##### 对于 .passive、.capture 和 .once 这些事件修饰符, Vue 提供了相应的前缀可以用于 on
+### 事件 & 按键修饰符
+
+> 对于 .passive、.capture 和 .once 这些事件修饰符, Vue 提供了相应的前缀可以用于 on
 
 修饰符|前缀
 :--|:--
@@ -94,7 +100,8 @@ on: {
 }
 ```
 
-##### 对于所有其它的修饰符，私有前缀都不是必须的，因为你可以在事件处理函数中使用事件方法：
+> 对于所有其它的修饰符，私有前缀都不是必须的，因为你可以在事件处理函数中使用事件方法：
+
 ``` js
 on: {
   keyup: function (event) {
@@ -113,11 +120,10 @@ on: {
 }
 ```
 
-## 插槽 slot 
+## 插槽 slot
 
 参数|说明|
 :--|:--
 slot| 自定义完整组件
 frontSlot| 定义element 组件前的插槽
 rearSlot| 定义element 组件后的插槽
-
