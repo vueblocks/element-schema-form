@@ -9,7 +9,7 @@
     "lint": "vue-cli-service lint",
     "build:lib": "vue-cli-service build --mode lib --target lib --name element-schema-form --dest lib src/index.js",
     "build:rollup": "rollup -c rollup.config.js",
-    "build:demand": "MINIFY=true npm run build:rollup",
+    "build:demand": "cross-env MINIFY=true npm run build:rollup",
     "bundle": "npm run build:lib && npm run build:demand",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
     "docs:build": "vuepress build docs",
@@ -23,7 +23,11 @@
     "type": "git",
     "url": "git+https://github.com/vueblocks/element-schema-form.git"
   },
-  "keywords": ["element", "json-schema", "form"],
+  "keywords": [
+    "element",
+    "json-schema",
+    "form"
+  ],
   "license": "MIT",
   "peerDependencies": {
     "element-ui": "^2.11.1"
@@ -41,6 +45,7 @@
     "babel-plugin-component": "^1.1.1",
     "babel-plugin-lodash": "^3.3.4",
     "babel-plugin-transform-remove-console": "^6.9.4",
+    "cross-env": "^6.0.3",
     "element-theme-chalk": "^2.10.1",
     "element-ui": "^2.11.1",
     "eslint": "^5.16.0",
@@ -57,7 +62,7 @@
     "rollup-plugin-json": "^4.0.0",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-terser": "^5.1.2",
-    "rollup-plugin-vue": "^5.1.2",
+    "rollup-plugin-vue": "^5.1.0",
     "terser": "^4.3.9",
     "vue-codemirror-lite": "^1.0.4",
     "vue-router": "^3.0.3",

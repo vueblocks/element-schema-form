@@ -68,8 +68,8 @@ const buildOptions = components => {
       output: buildOutput(key),
       plugins,
       external: [
-        'vue-codemirror-lite',
-        'vue2-editor'
+        'vueCodemirrorLite',
+        'vue2Editor'
       ]
     }
   })
