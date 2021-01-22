@@ -1,6 +1,6 @@
 {
   "name": "@vueblocks/element-schema-form",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "A schema-based form generator component for Element UI.",
   "author": "xiaoluoboding <xiaoluoboding@gmail.com>",
   "scripts": {
