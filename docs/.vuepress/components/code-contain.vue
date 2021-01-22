@@ -27,6 +27,7 @@ import LayoutFlexible from './layout-flexible'
 import SlotFront from './slot-front'
 import SlotRear from './slot-rear'
 import SlotSlot from './slot-slot'
+import SlotTool from './slot-tool'
 // 自定义组件
 import CustomInput from './custom-input'
 // 动态属性
@@ -54,7 +55,8 @@ export default {
     SlotSlot,
     CustomInput,
     DynamicInput,
-    ExpandCodeMirror
+    ExpandCodeMirror,
+    SlotTool
   },
   data () {
     return {

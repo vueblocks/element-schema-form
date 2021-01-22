@@ -15,3 +15,8 @@
 <code-contain compName="SlotRear" link="https://codesandbox.io/s/houzhichacao-vrkco?fontsize=14">  
 <<< @/docs/.vuepress/components/slot-rear.vue
 </code-contain>
+
+### 自定义前置/后置文本
+<code-contain compName="SlotTool">
+<<< @/docs/.vuepress/components/slot-tool.vue
+</code-contain>

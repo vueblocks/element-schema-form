@@ -1,5 +1,6 @@
 <template>
   <el-form-item :prop="col.prop" v-bind="col.formItem" class="schema-form-item">
+    <span v-if="col.frontHtml" v-html="col.frontHtml" />
     <slot :name="col.frontSlot" v-if="col.frontSlot"></slot>
     <component
       v-bind="col.attrs"
@@ -14,6 +15,7 @@
     >
     </component>
     <slot :name="col.rearSlot" v-if="col.rearSlot"></slot>
+    <span v-if="col.rearHtml" v-html="col.rearHtml" />
   </el-form-item>
 </template>
 
