@@ -6,6 +6,9 @@
         :schema="formSchema"
         :options="options"
       >
+        <div slot="inputName">
+          <i class="el-icon-success"></i>
+        </div>
       </schema-form>
     </el-form>
     <div class="page-footer">

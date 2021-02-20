@@ -19,6 +19,7 @@
               :options="options"
               v-on="$listeners"
             >
+              <slot v-if="col.labelSlot" :name="col.labelSlot" :slot="col.labelSlot"></slot>
               <slot v-if="col.frontSlot" :name="col.frontSlot" :slot="col.frontSlot"></slot>
               <slot v-if="col.rearSlot" :name="col.rearSlot" :slot="col.rearSlot"></slot>
             </schema-form-item>

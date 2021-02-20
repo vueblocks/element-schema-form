@@ -22,7 +22,8 @@ export default {
             prop: 'name',
             frontHtml: '近',
             formItem: { label: '店铺年龄' },
-            rearHtml: '天'
+            rearHtml: '天',
+            labelTooltip: '统计自营店铺'
           }
         ]
       ]

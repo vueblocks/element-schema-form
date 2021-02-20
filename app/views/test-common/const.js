@@ -19,14 +19,16 @@ export const schema = [
     {
       type: 'input',
       prop: 'name',
-      formItem: { label: '姓名' },
+      formItem: { label: '电话' },
       attrs: { placeholder: '测试优先级' },
-      colGrid: { span: 8 }
+      colGrid: { span: 8 },
+      labelSlot: 'inputName'
     }, {
       type: 'input',
       prop: 'age',
       formItem: { label: '年龄' },
-      colGrid: { span: 8 }
+      colGrid: { span: 8 },
+      labelTooltip: '初三'
     }
   ],
   [

@@ -4,6 +4,9 @@
       :model="model"
       :schema="schema"
     >
+      <span slot="ageName">
+        标签插槽
+      </span>
     </schema-form>
   </el-form>
 </template>
@@ -21,7 +24,8 @@ export default {
             type: 'input',
             prop: 'name',
             frontHtml: '近',
-            formItem: { label: '店铺年龄' },
+            labelSlot: 'ageName',
+            formItem: { },
             rearHtml: '天'
           }
         ]

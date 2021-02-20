@@ -125,5 +125,6 @@ on: {
 参数|说明|
 :--|:--
 slot| 自定义完整组件
+labelSlot| 用于 el-form-item 中的 label插槽
 frontSlot| 定义element 组件前的插槽
 rearSlot| 定义element 组件后的插槽

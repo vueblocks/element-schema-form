@@ -1,5 +1,14 @@
 <template>
   <el-form-item :prop="col.prop" v-bind="col.formItem" class="schema-form-item">
+    <template slot="label" v-if="col.labelSlot">
+      <slot :name="col.labelSlot"></slot>
+    </template>
+    <template slot="label" v-if="col.labelTooltip">
+      <span class="schema-label">{{ labelContent }}</span>
+      <el-tooltip :content="col.labelTooltip">
+        <i class="el-icon-warning"></i>
+      </el-tooltip>
+    </template>
     <span v-if="col.frontHtml" v-html="col.frontHtml" />
     <slot :name="col.frontSlot" v-if="col.frontSlot"></slot>
     <component
@@ -37,6 +46,12 @@ export default {
       builtInNames: ['input', 'select', 'radio', 'datepicker',
         'cascader', 'placeholder', 'checkbox', 'slider', 'timeselect', 'timepicker', 'jsoneditor', 'quill', 'codemirror',
         'rate', 'switch', 'colorpicker', 'tags', 'progress']
+    }
+  },
+  computed: {
+    labelContent () {
+      let _formItem = this.col.formItem || {}
+      return _formItem.label || ''
     }
   },
   methods: {
