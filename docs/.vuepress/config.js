@@ -44,7 +44,8 @@ module.exports = {
             ['/guide/component/slot', 'slot 插槽'],
             ['/guide/component/dynamic', 'dynamicAttrs 动态属性'],
             ['/guide/component/custom', '自定义组件'],
-            ['/guide/component/expand', '第三方拓展']
+            ['/guide/component/expand', '第三方拓展'],
+            ['/guide/component/attr', '拓展属性']
           ]
         }
       ]

@@ -36,6 +36,8 @@ import CustomInput from './custom-input'
 import DynamicInput from './dynamic-input'
 // 拓展组件
 import ExpandCodeMirror from './expand-code-mirror'
+// 拓展属性
+import AttrsSelectSide from './attrs/select-side.vue'
 
 export default {
   props: {
@@ -60,7 +62,8 @@ export default {
     ExpandCodeMirror,
     SlotTool,
     SlotTooltip,
-    SlotLabel
+    SlotLabel,
+    AttrsSelectSide
   },
   data () {
     return {

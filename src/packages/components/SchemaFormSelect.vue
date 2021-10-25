@@ -12,6 +12,12 @@
       :value="option.value"
       :disabled="option.disabled"
     >
+      <template v-if="hasOptionSides">
+        <span v-for="(items, index) in optionSides" :key="index" :class="`side-${index}`">
+          {{ option[items] }}
+        </span>
+      </template>
+      <span v-else>{{ option.label }}</span>
     </el-option>
   </el-select>
 </template>
@@ -21,7 +27,15 @@ import FormMixin from '../mixins/form-mixin'
 
 export default {
   name: 'SchemaFormSelect',
-  mixins: [FormMixin]
+  mixins: [FormMixin],
+  computed: {
+    optionSides () {
+      return this.attrsAll.optionSides || ''
+    },
+    hasOptionSides () {
+      return Array.isArray(this.optionSides) && this.optionSides.length >= 2
+    }
+  }
 }
 </script>
 
