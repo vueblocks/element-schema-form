@@ -51,7 +51,7 @@
     "element-ui": "^2.11.1",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
-    "jsoneditor": "^7.0.1",
+    "jsoneditor": "^9.5.6",
     "less": "^3.0.4",
     "less-loader": "^4.1.0",
     "lodash.clonedeep": "^4.5.0",
