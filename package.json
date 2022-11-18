@@ -39,7 +39,7 @@
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.0.5",
     "@vue/cli-plugin-eslint": "^4.0.5",
-    "@vue/cli-service": "^4.0.5",
+    "@vue/cli-service": "^5.0.8",
     "@vue/eslint-config-standard": "^4.0.0",
     "@vuepress/theme-default": "^1.8.2",
     "babel-eslint": "^10.0.1",
@@ -63,13 +63,13 @@
     "rollup-plugin-json": "^4.0.0",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-terser": "^5.1.2",
-    "rollup-plugin-vue": "^5.1.0",
+    "rollup-plugin-vue": "^6.0.0",
     "terser": "^4.3.9",
     "vue-codemirror-lite": "^1.0.4",
     "vue-router": "^3.0.3",
     "vue-template-compiler": "^2.6.10",
     "vue2-editor": "^2.10.2",
-    "vuepress": "^0.14.5",
+    "vuepress": "^1.9.7",
     "vuex": "^3.0.1"
   }
 }
